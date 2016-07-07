@@ -1,4 +1,4 @@
-## Hoodie-electron-demo(Hoodie Desktop application)
+## Hoodie-electron-app(Hoodie Desktop application)
   We're team Rookies from Rails Girls Summer of code(RGSOC 2016).
   We are working on Hoodie native application(desktop app).
   For making it, we are planning to wrap the UI and functionalities with Electron.

@@ -76,9 +76,9 @@
               <div class= "col-md-8 col-lg-8">
                 <!-- New App menu-->
                 <li class="list-group-item">
-                  <button id="create-app-btn" type ="button" class="btn btn-primary btn-lg btn-block">New App<i class="glyphicon glyphicon-plus-sign pull-right"></i></button>
+                  <button id="new-app-btn" type ="button" class="btn btn-primary btn-lg btn-block">New App<i class="glyphicon glyphicon-plus-sign pull-right"></i></button>
                 </li>
-                <div id="create-app">display create app contents
+                <div id="create-app" class="top-space">
                   <!-- well, create app -->
                   <div class ="well">
                     <div class="container-fluid">
@@ -86,10 +86,10 @@
                       <h3 class="text-center">Let's create Hoodie App :D</h3>
                       <div class="form-actions">
                         <p class="label_size text-center">App Name</p>
-                        <input type="text" class="form-control from-size" placeholder="Type your app name">
+                        <input id="empty-text" type="text" class="form-control from-size" placeholder="Type your app name">
                       </div>
-                      <button type="button" class="btn btn_cancel pull-right btn_size_move">Cancel</button>
-                      <button type="submit" class="btn btn-primary pull-right btn_size_move" onClick="self.location='detail_app_page.html'">create</button>
+                      <button id="cancel-create"type="button" class="btn btn_cancel pull-right btn_size_move">Cancel</button>
+                      <button id="choose-create" type="submit" class="btn btn-primary pull-right btn_size_move">create</button>
                     </div>
                   </div>
                   <!--end well, create app -->

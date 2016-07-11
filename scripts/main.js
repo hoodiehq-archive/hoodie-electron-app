@@ -17,12 +17,12 @@ if (newAppBtn) {
 					localStorage.setItem("app-name", appname);
 					//redirect from index page to detail_app_page
 					//JS
-					window.location.replace("detail_app_page.html");
+					//window.location.replace("detail_app_page.html");
 					//Jquery
-					// $(document).ready(function(){
-					// 	var url = "detail_app_page.html";
-					// 	$(location).attr('href',url);
-					// });
+					 $(document).ready(function(){
+					 	var url = "detail_app_page.html";
+					 	$(location).attr('href',url);
+					 });
 				}
 			});
 		}
@@ -42,7 +42,8 @@ var getAppName = localStorage.getItem("app-name");
 console.log(getAppName);
 if(getAppName){
 	console.log("if getName"+getAppName);
-	document.getElementById('#name-app').innerHTML = getAppName;
+	document.querySelector('#name-app').innerHTML = getAppName;
+	//document.getElementById('#name-app').innerHTML = getAppName;
 	//$("#name-app").innerHTML = getAppName;
 }
 

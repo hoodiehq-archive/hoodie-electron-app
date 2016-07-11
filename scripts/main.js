@@ -1,3 +1,4 @@
+$("#wrapper").load("sidebar.html")
 $(function() {
 	//change app name
 	$('#js-change-appname').on('click', function () {
@@ -30,7 +31,7 @@ $(function myFunction() {
 			$myDropdown.classList.toggle("show");
 		}
 })
-
+$("#wrapper").load("sidebar.html")
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function(event) {
   if (!event.target.matches('.dropbtn')) {

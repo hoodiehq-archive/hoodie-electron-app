@@ -15,35 +15,35 @@
 </head>
 <body>
   <div id="wrapper">
-    <div id="sidebar-wrapper">
-      <div id="page-content-wrapper">
-        <ul class="sidebar-nav">
-         <li class = "inner-addon left-addon">
-           <form method="get" action="/search" id="search">
-             <i class="glyphicon glyphicon-search"></i>
-             <input name="q" type="text" size="40" placeholder="Search..." />
-           </form><br>
-         </li>
-         <li class=""><span class=""></span> Applicatons</li>
-         <ul><div class="content-left">
-           <li class="list-group-item">
-             <button type ="button" class="btn btn-secondary btn-sm btn-block" onClick="self.location='detail_app_page.html'"> <i class="glyphicon glyphicon-folder-open"></i> App1</button>
-           <!-- App1 menu-->
-         </li>
-         <br>
-         <!-- App2 menu-->
-         <li class="list-group-item">
-           <button type ="button" class="btn btn-secondary btn-sm btn-block" onClick="self.location='detail_app_page.html'">App2 <i class="glyphicon glyphicon-folder-open"></i></button>
-         </li>
-           </div>
-         </ul>
-          <li class=""><span class=""></span> <a href="#">About</a></li>
-          <li class=""><span class=""></span> <a href="#">Contact us</a></li>
-          <li class=""><span class=""></span> <a href="#">Tutu </a></li>
-        </ul>
-      </div>
-    </div>
-  </div><!-- wrapper closed here -->
+            <div id="sidebar-wrapper">
+              <div id="page-content-wrapper">
+                <ul class="sidebar-nav">
+                  <li class = "inner-addon left-addon">
+                    <form method="get" action="/search" id="search">
+                      <i class="glyphicon glyphicon-search"></i>
+                      <input name="q" type="text" size="40" placeholder="Search..." />
+                    </form><br>
+             </li>
+                  <li class=""><button class="btn btn-default dropdown-toggle" type="button" id="appsbtn" data-toggle="dropdown">Applicatons<span class="caret"></span> </button></li>
+                  <ul><div class="content-left"class="dropbtn-menu" role="menu" aria-labelledby="appsbtn">
+                    <!-- <li class="list-group-item"> -->
+                      <button type ="button" class="btn btn-secondary btn-sm btn-block" onClick="self.location='detail_app_page.html'"> <i class="glyphicon glyphicon-folder-open"></i> App1</button>
+                    <!-- App1 menu-->
+<!--                  </li>-->
+                  <br>
+                  <!-- App2 menu-->
+                   <!-- <li class="list-group-item"> -->
+                    <button type ="button" class="btn btn-secondary btn-sm btn-block" onClick="self.location='detail_app_page.html'">App2 <i class="glyphicon glyphicon-folder-open"></i></button>
+<!--                  </li>-->
+                    </div>
+                   </ul>
+                  <li class=""><span class=""></span> <a href="#">About</a></li>
+                  <li class=""><span class=""></span> <a href="#">Contact us</a></li>
+                  <li class=""><span class=""></span> <a href="#">Tutu </a></li>
+                </ul>
+              </div>
+            </div>
+          </div><!-- wrapper closed here -->
 
 
   <div class="container">

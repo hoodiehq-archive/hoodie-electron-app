@@ -39,8 +39,6 @@ if(getAppName){
 	console.log("if getName"+getAppName);
 	//main.js:41 Uncaught TypeError: Cannot set property 'innerHTML' of null
 	document.querySelector('#name-app').innerHTML = getAppName;
-	//document.getElementById('#name-app').innerHTML = getAppName;
-	//$("#name-app").innerHTML = getAppName;
 }
 
 

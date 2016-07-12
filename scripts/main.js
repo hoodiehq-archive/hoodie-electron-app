@@ -1,33 +1,28 @@
 //index.html
 //display the creat app element, when a user click the new app button
-var newAppBtn = document.querySelector("#new-app-btn");
-if (newAppBtn) {
-	newAppBtn.addEventListener("click", function(){
-		document.querySelector("#create-app").style.display = "block";
-		//create an new app, when a user click 'create button'
-		var createBtn = document.querySelector("#choose-create");
-		debugger;
-		if(createBtn){
-			createBtn.addEventListener("click",function(){
-				var appname = document.getElementsByTagName("input")[0].value;
-				console.log('appname_value: '+ appname);
-				//save the appname to the local storage
-				if(appname){
-					console.log('appname_localstorage: '+ appname);
-					localStorage.setItem("app-name", appname);
-					//redirect from index page to detail_app_page
-					//JS
-					//window.location.replace("detail_app_page.html");
-					//Jquery
-					 $(document).ready(function(){
-					 	var url = "detail_app_page.html";
-					 	$(location).attr('href',url);
-					 });
-				}
-			});
-		}
-	});
-}
+$("#new-app-btn").on("click", function(){
+	document.querySelector("#create-app").style.display = "block";
+	//create an new app, when a user click 'create button'
+	var createBtn = document.querySelector("#choose-create");
+	if(createBtn){
+		createBtn.addEventListener("click",function(){
+			var appname = document.getElementsByTagName("input")[0].value;
+			console.log('appname_value: '+ appname);
+			//save the appname to the local storage
+			if(appname){
+				console.log('appname_localstorage: '+ appname);
+				localStorage.setItem("app-name", appname);
+				//redirect from index page to detail_app_page
+				//JS
+				//window.location.replace("detail_app_page.html");
+				//Jquery
+				var url = "detail_app_page.html";
+				$(location).attr('href',url);
+			}
+		});
+	}
+});
+
 
 //empty the text in the text field, when a user click the 'cancel button'
 var cancelBtn = document.querySelector("#cancel-create");
@@ -42,6 +37,7 @@ var getAppName = localStorage.getItem("app-name");
 console.log(getAppName);
 if(getAppName){
 	console.log("if getName"+getAppName);
+	//main.js:41 Uncaught TypeError: Cannot set property 'innerHTML' of null
 	document.querySelector('#name-app').innerHTML = getAppName;
 	//document.getElementById('#name-app').innerHTML = getAppName;
 	//$("#name-app").innerHTML = getAppName;

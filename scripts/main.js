@@ -1,7 +1,7 @@
 //$("#wrapper").load("sidebar.html")
 //index.html
 //display the creat app element, when a user click the new app button
-var apps = [];
+var apps = JSON.parse(localStorage.getItem('apps')) || [];
 $("#new-app-btn").on("click", function(){
 	document.querySelector("#create-app").style.display = "block";
 	//create an new app, when a user click 'create button'
@@ -20,11 +20,12 @@ $("#new-app-btn").on("click", function(){
 				localStorage.setItem('apps', JSON.stringify(apps));
 				console.log('apps array:'+apps);
 				console.log('apps JSON.stringify:'+JSON.stringify(apps));
-				debugger;
 				//redirect from index page to detail_app_page
 				//JS
 				//window.location.replace("detail_app_page.html");
 				//Jquery
+				//localStorage.getItem('apps');
+				apps = JSON.parse(localStorage.getItem('apps'));
 				var url = "detail_app_page.html";
 				$(location).attr('href',url);
 			}
@@ -48,8 +49,6 @@ if(getAppName){
 	console.log("if getName"+getAppName);
 	$('#name-app').html(getAppName);
 }
-localStorage.getItem('apps');
-JSON.parse(localStorage.getItem('apps'));
 
 $(function() {
 	//change app name
@@ -71,23 +70,23 @@ $(function() {
 });
 
 $(function myFunction() {
-    var $myDropdown = document.getElementById("myDropdown")
-		if ($myDropdown) {
-			$myDropdown.classList.toggle("show");
-		}
+	var $myDropdown = document.getElementById("myDropdown")
+	if ($myDropdown) {
+		$myDropdown.classList.toggle("show");
+	}
 })
 //$("#wrapper").load("sidebar.html")
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
+	if (!event.target.matches('.dropbtn')) {
 
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
+		var dropdowns = document.getElementsByClassName("dropdown-content");
+		var i;
+		for (i = 0; i < dropdowns.length; i++) {
+			var openDropdown = dropdowns[i];
+			if (openDropdown.classList.contains('show')) {
+				openDropdown.classList.remove('show');
+			}
+		}
+	}
 }

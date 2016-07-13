@@ -1,7 +1,14 @@
 //$("#wrapper").load("sidebar.html")
 //index.html
 //display the creat app element, when a user click the new app button
-var apps = JSON.parse(localStorage.getItem('apps')) || [];
+var apps;
+if ((typeof localStorage.getItem('apps') !== "undefined") &&
+ (localStorage.getItem('apps') !== null))
+	apps = JSON.parse(localStorage.getItem('apps'));
+else {
+	apps = [];
+}
+//var apps = JSON.parse() || [];
 $("#new-app-btn").on("click", function(){
 	document.querySelector("#create-app").style.display = "block";
 	//create an new app, when a user click 'create button'
@@ -13,8 +20,8 @@ $("#new-app-btn").on("click", function(){
 			console.log('appname_value: '+ appname);
 			//save the appname to the local storage
 			if(appname){
-				console.log('appname_localstorage: '+ appname);
-				//localStorage.setItem("app-name", appname);
+				// console.log('appname_localstorage: '+ appname);
+				localStorage.setItem("app-name", appname);
 				apps.push(appname);
 				//localStorage.setItem('apps', apps);
 				localStorage.setItem('apps', JSON.stringify(apps));
@@ -43,7 +50,8 @@ if(cancelBtn){
 }
 
 //detail_app_page.html
-var getAppName = localStorage.getItem("app-name");
+var lengthApp = apps.length - 1;
+var getAppName = apps[lengthApp];
 console.log(getAppName);
 if(getAppName){
 	console.log("if getName"+getAppName);

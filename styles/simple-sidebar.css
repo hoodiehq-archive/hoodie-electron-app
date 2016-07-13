@@ -39,7 +39,6 @@
     position: absolute;
     margin-right: -250px;
 }
-
 #search {
 
 }
@@ -130,7 +129,8 @@
     background: none;
 }
 
-@media(min-width:268px) {
+
+@media(min-width:68px) {
     #wrapper {
         padding-left: 250px;
     }

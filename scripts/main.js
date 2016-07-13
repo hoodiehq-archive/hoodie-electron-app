@@ -1,18 +1,26 @@
 //$("#wrapper").load("sidebar.html")
 //index.html
 //display the creat app element, when a user click the new app button
+var apps = [];
 $("#new-app-btn").on("click", function(){
 	document.querySelector("#create-app").style.display = "block";
 	//create an new app, when a user click 'create button'
 	var createBtn = document.querySelector("#choose-create");
 	if(createBtn){
 		createBtn.addEventListener("click",function(){
+			//create app array for exisiting apps
 			var appname = document.getElementsByTagName("input")[0].value;
 			console.log('appname_value: '+ appname);
 			//save the appname to the local storage
 			if(appname){
 				console.log('appname_localstorage: '+ appname);
-				localStorage.setItem("app-name", appname);
+				//localStorage.setItem("app-name", appname);
+				apps.push(appname);
+				//localStorage.setItem('apps', apps);
+				localStorage.setItem('apps', JSON.stringify(apps));
+				console.log('apps array:'+apps);
+				console.log('apps JSON.stringify:'+JSON.stringify(apps));
+				debugger;
 				//redirect from index page to detail_app_page
 				//JS
 				//window.location.replace("detail_app_page.html");
@@ -38,13 +46,10 @@ var getAppName = localStorage.getItem("app-name");
 console.log(getAppName);
 if(getAppName){
 	console.log("if getName"+getAppName);
-	//main.js:41 Uncaught TypeError: Cannot set property 'innerHTML' of null
-	document.querySelector('#name-app').innerHTML = getAppName;
+	$('#name-app').html(getAppName);
 }
-
-var apps = [ ];
-localStorage.setItem('apps','JSON.stringify(apps)');
-JSONparse(apps);
+localStorage.getItem('apps');
+JSON.parse(localStorage.getItem('apps'));
 
 $(function() {
 	//change app name
@@ -64,14 +69,6 @@ $(function() {
 	});
 
 });
-
-<<<<<<< HEAD
-var el = document.querySelector("#create-app-btn");
-if (el) {
-  el.addEventListener("click", function(){
-    document.querySelector("#create-app").style.display = "block";
-  });
-}
 
 $(function myFunction() {
     var $myDropdown = document.getElementById("myDropdown")
@@ -94,27 +91,3 @@ window.onclick = function(event) {
     }
   }
 }
-=======
-// //sidebar
-// $(function myFunction() {
-//     var $myDropdown = document.getElementById("myDropdown")
-// 		if ($myDropdown) {
-// 			$myDropdown.classList.toggle("show");
-// 		}
-// })
-//
-// // Close the dropdown menu if the user clicks outside of it
-// window.onclick = function(event) {
-//   if (!event.target.matches('.dropbtn')) {
-//
-//     var dropdowns = document.getElementsByClassName("dropdown-content");
-//     var i;
-//     for (i = 0; i < dropdowns.length; i++) {
-//       var openDropdown = dropdowns[i];
-//       if (openDropdown.classList.contains('show')) {
-//         openDropdown.classList.remove('show');
-//       }
-//     }
-//   }
-// }
->>>>>>> gh-pages

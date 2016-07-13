@@ -1,14 +1,17 @@
 //$("#wrapper").load("sidebar.html")
 //index.html
 //display the creat app element, when a user click the new app button
-var apps;
-if ((typeof localStorage.getItem('apps') !== "undefined") &&
- (localStorage.getItem('apps') !== null))
-	apps = JSON.parse(localStorage.getItem('apps'));
-else {
-	apps = [];
-}
-//var apps = JSON.parse() || [];
+// var apps;
+// if ((typeof localStorage.getItem('apps') !== "undefined") &&
+//  (localStorage.getItem('apps') !== null))
+// 	apps = JSON.parse(localStorage.getItem('apps'));
+// else {
+// 	apps = [];
+// }
+var appsData = localStorage.getItem('apps');
+var apps = appsData ? JSON.parse(appsData) : [];
+
+//var apps = JSON.parse(localStorage.getItem('apps')) || [];
 $("#new-app-btn").on("click", function(){
 	document.querySelector("#create-app").style.display = "block";
 	//create an new app, when a user click 'create button'
@@ -19,10 +22,11 @@ $("#new-app-btn").on("click", function(){
 			var appname = document.getElementsByTagName("input")[0].value;
 			console.log('appname_value: '+ appname);
 			//save the appname to the local storage
-			if(appname){
+			var app = {name: appname};
+			if(app.name){
 				// console.log('appname_localstorage: '+ appname);
-				localStorage.setItem("app-name", appname);
-				apps.push(appname);
+				//localStorage.setItem("app-name", appname);
+				apps.push(app);
 				//localStorage.setItem('apps', apps);
 				localStorage.setItem('apps', JSON.stringify(apps));
 				console.log('apps array:'+apps);
@@ -32,9 +36,9 @@ $("#new-app-btn").on("click", function(){
 				//window.location.replace("detail_app_page.html");
 				//Jquery
 				//localStorage.getItem('apps');
-				apps = JSON.parse(localStorage.getItem('apps'));
-				var url = "detail_app_page.html";
+				var url = "detail_app_page.html#"+app.name;
 				$(location).attr('href',url);
+
 			}
 		});
 	}
@@ -50,12 +54,13 @@ if(cancelBtn){
 }
 
 //detail_app_page.html
-var lengthApp = apps.length - 1;
-var getAppName = apps[lengthApp];
-console.log(getAppName);
-if(getAppName){
-	console.log("if getName"+getAppName);
-	$('#name-app').html(getAppName);
+//var lengthApp = apps.length - 1;
+//var getAppName = apps[lengthApp];
+var appname = location.hash.substr(1);
+console.log(appname);
+if(appname){
+	console.log("if getName"+appname);
+	$('#name-app').html(appname);
 }
 
 $(function() {

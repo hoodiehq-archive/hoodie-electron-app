@@ -10,13 +10,15 @@
   <link rel="stylesheet" href="vendor/bootstrap-3.3.6-dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/simple-sidebar.css">
-
   <script src="vendor/modernizr.js"></script>
-
   </head>
 <body>
-
-  <!-- <div id="wrapper">
+  <!--Tryign to put sidebar.html inside of left-sidebar
+bur getting this error
+jquery-2.2.4.min.js:4 XMLHttpRequest cannot load file:///home/soo/Desktop/Rookies/hoodie-electron-app/sidebar.html.
+Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https, chrome-extension-resource.-->
+  <div id="left-sidebar"></div>
+  <div id="wrapper">
     <div id="sidebar-wrapper">
       <div id="page-content-wrapper">
         <ul class="sidebar-nav">
@@ -32,12 +34,12 @@
               <ul id="convoy_list" class="dropdown-menu" role="menu" aria-labelledby="menu1">
 
 
-                
+                <!-- <li role="presentation" >
                   <button role="menuitem" tabindex="-1" type ="button" class="btn btn-secondary btn-sm btn-block"
                   onClick="self.location='detail_app_page.html'">
                   <i class="glyphicon glyphicon-folder-open"></i> App </button>
                 </li> -->
-              <!-- </li>
+              </li>
             </ul>
             <li class=""><span class=""></span> <a href="#">Documentation</a></li>
             <li class=""><span class=""></span> <a href="#">Other </a></li>
@@ -46,8 +48,8 @@
           </ul>
         </div>
       </div>
-    </div> --> -->
-
+    </div>
+    <!-- wrapper closed here -->
 
   <div class="container">
     <!-- navbar: logo img, setting and close buttons -->

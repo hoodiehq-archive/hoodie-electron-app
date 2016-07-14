@@ -10,6 +10,7 @@
 // }
 var appsData = localStorage.getItem('apps');
 var apps = appsData ? JSON.parse(appsData) : [];
+var app;
 // testing
 //var apps = JSON.parse(localStorage.getItem('apps')) || [];
 $("#new-app-btn").on("click", function(){
@@ -53,11 +54,28 @@ if(cancelBtn){
 	});
 }
 
+
 //detail_app_page.html
 //var lengthApp = apps.length - 1;
 //var getAppName = apps[lengthApp];
 var appname = location.hash.substr(1);
 console.log(appname);
+
+//redirect the exsiting apps to the detail_app_page.html
+//It redirect but, not displaying app name in URL
+console.log('redirect-appname'+appname);
+console.log('redirect-apps[i].name'+apps[i].name);
+console.log('redirect-app.name'+app.name);
+
+function redirect(){
+	console.log('redirect-appname'+appname);
+	console.log('redirect-apps[i].name'+apps[i].name);
+	console.log('redirect-app.name'+app.name);
+	var url = "detail_app_page.html#"+appsname;
+	$(location).attr('href',url);
+	$('#name-app').html(appname);
+}
+
 // if(appname){
 // 	var container = $('#convoy_list');
 // 	var result = '<li role="presentation" class="divider"><li role="presentation">' +
@@ -74,7 +92,7 @@ for (i=0;i<apps.length;i++)
 
 	var container = $('#convoy_list');
 	var result = '<li role="presentation" class="divider"><li role="presentation">' +
-							 '<button role="menuitem" tabindex="-1" type="button" class="btn btn-secondary btn-sm btn-block">' +
+							 '<button role="menuitem" tabindex="-1" type="button" class="btn btn-secondary btn-sm btn-block" onclick=redirect();>' +
 							 '<i class="glyphicon glyphicon-folder-open"></i> ' +
 							 apps[i].name + '</button></li></li>';
  container.append(result);
@@ -101,38 +119,6 @@ $(function() {
 	});
 
 });
-//
-// $('#convoy_list').on("click", function Display(){
-//
-//     var listId=$(JSON.parse(localStorage.getItem("apps"+i)));
-//     var select= $('#convoy_list');
-// 		var container = $(this).closest('.container-fluid');
-// 		var app_name = $('#empty-text', container).val();
-// 		$('<li>', $(this)).appendTo(apps.name);
-// 		console.log(apps);
-//
-//
-// });
 
-
-// $(function myFunction() {
-// 	var $myDropdown = document.getElementById("myDropdown")
-// 	if ($myDropdown) {
-// 		$myDropdown.classList.toggle("show");
-// 	}
-// })
-// //$("#wrapper").load("sidebar.html")
-// // Close the dropdown menu if the user clicks outside of it
-// window.onclick = function(event) {
-// 	if (!event.target.matches('.dropbtn')) {
-//
-// 		var dropdowns = document.getElementsByClassName("dropdown-content");
-// 		var i;
-// 		for (i = 0; i < dropdowns.length; i++) {
-// 			var openDropdown = dropdowns[i];
-// 			if (openDropdown.classList.contains('show')) {
-// 				openDropdown.classList.remove('show');
-// 			}
-// 		}
-// 	}
-// }
+//cross origin request error, it's not displaying the sidebar
+$('#left-sidebar').load('sidebar.html');

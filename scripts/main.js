@@ -1,18 +1,6 @@
-//$("#wrapper").load("sidebar.html")
-//index.html
-//display the creat app element, when a user click the new app button
-// var apps;
-// if ((typeof localStorage.getItem('apps') !== "undefined") &&
-//  (localStorage.getItem('apps') !== null))
-// 	apps = JSON.parse(localStorage.getItem('apps'));
-// else {
-// 	apps = [];
-// }
 var appsData = localStorage.getItem('apps');
 var apps = appsData ? JSON.parse(appsData) : [];
-var app;
-// testing
-//var apps = JSON.parse(localStorage.getItem('apps')) || [];
+
 $("#new-app-btn").on("click", function(){
 	document.querySelector("#create-app").style.display = "block";
 	//create an new app, when a user click 'create button'
@@ -20,7 +8,8 @@ $("#new-app-btn").on("click", function(){
 	if(createBtn){
 		createBtn.addEventListener("click",function(){
 			//create app array for exisiting apps
-			var appname = document.getElementsByTagName("input")[0].value;
+			var appname = document.querySelector("#empty-text").value;
+			debugger;
 			console.log('appname_value: '+ appname);
 			//save the appname to the local storage
 			var app = {name: appname};
@@ -33,13 +22,8 @@ $("#new-app-btn").on("click", function(){
 				console.log('apps array:'+apps);
 				console.log('apps JSON.stringify:'+JSON.stringify(apps));
 				//redirect from index page to detail_app_page
-				//JS
-				//window.location.replace("detail_app_page.html");
-				//Jquery
-				//localStorage.getItem('apps');
 				var url = "detail_app_page.html#"+app.name;
-				$(location).attr('href',url);
-
+				location.href = url;
 			}
 		});
 	}
@@ -56,49 +40,32 @@ if(cancelBtn){
 
 
 //detail_app_page.html
-//var lengthApp = apps.length - 1;
-//var getAppName = apps[lengthApp];
-var appname = location.hash.substr(1);
-console.log(appname);
-
-//redirect the exsiting apps to the detail_app_page.html
-//It redirect but, not displaying app name in URL
-console.log('redirect-appname'+appname);
-console.log('redirect-apps[i].name'+apps[i].name);
-console.log('redirect-app.name'+app.name);
-
-function redirect(){
-	console.log('redirect-appname'+appname);
-	console.log('redirect-apps[i].name'+apps[i].name);
-	console.log('redirect-app.name'+app.name);
-	var url = "detail_app_page.html#"+appsname;
-	$(location).attr('href',url);
+var appname = "";
+//https://api.jquerymobile.com/hashchange/
+//The hashchange event is fired when the fragment identifier of the URL has changed
+//It reload the page with a new url
+$( window ).on('hashchange',function() {
+	appname = location.hash.substr(1);
+	console.log(appname);
 	$('#name-app').html(appname);
-}
+ });
+ // Since the event is only triggered when the hash changes, we need to trigger
+ // the event now, to handle the hash the page may have loaded with.
+$(window).trigger('hashchange');
 
-// if(appname){
-// 	var container = $('#convoy_list');
-// 	var result = '<li role="presentation" class="divider"><li role="presentation">' +
-//                '<button role="menuitem" tabindex="-1" type="button" class="btn btn-secondary btn-sm btn-block">' +
-//                '<i class="glyphicon glyphicon-folder-open"></i> ' +
-// 							 appname + '</button></li></li>';
-// 	container.append(result);
-// 	console.log($('<li>', container));
-// 	console.log("if getName"+appname);
-// 	$('#name-app').html(appname);
-// }
+
+//display exisiting apps in the sidebar
 for (i=0;i<apps.length;i++)
 {
 
 	var container = $('#convoy_list');
 	var result = '<li role="presentation" class="divider"><li role="presentation">' +
-							 '<button role="menuitem" tabindex="-1" type="button" class="btn btn-secondary btn-sm btn-block" onclick=redirect();>' +
+							 '<a href="detail_app_page.html#'+apps[i].name+'" class="button" role="menuitem" tabindex="-1" type="button" class="btn btn-secondary btn-sm btn-block">' +
 							 '<i class="glyphicon glyphicon-folder-open"></i> ' +
-							 apps[i].name + '</button></li></li>';
+							 apps[i].name + '</a></li></li>';
  container.append(result);
  //console.log($('<li>', container));
  console.log('apps JSON.stringify:'+ apps[i].name);
- $('#name-app').html(appname);
 }
 
 $(function() {
@@ -119,6 +86,3 @@ $(function() {
 	});
 
 });
-
-//cross origin request error, it's not displaying the sidebar
-$('#left-sidebar').load('sidebar.html');

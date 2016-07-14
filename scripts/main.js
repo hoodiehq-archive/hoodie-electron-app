@@ -1,13 +1,6 @@
-//$("#wrapper").load("sidebar.html")
-//index.html
-//display the creat app element, when a user click the new app button
-// var apps;
-// if ((typeof localStorage.getItem('apps') !== "undefined") &&
-//  (localStorage.getItem('apps') !== null))
-// 	apps = JSON.parse(localStorage.getItem('apps'));
-// else {
-// 	apps = [];
-// }
+// $("#wrapper").load("sidebar.html")
+// index.html
+// display the creat app element, when a user click the new app button
 var appsData = localStorage.getItem('apps');
 var apps = appsData ? JSON.parse(appsData) : [];
 
@@ -18,7 +11,7 @@ $("#new-app-btn").on("click", function(){
 	var createBtn = document.querySelector("#choose-create");
 	if(createBtn){
 		createBtn.addEventListener("click",function(){
-			//create app array for exisiting apps
+			//create app array for existing apps
 			var appname = document.getElementsByTagName("input")[0].value;
 			console.log('appname_value: '+ appname);
 			//save the appname to the local storage
@@ -53,9 +46,9 @@ if(cancelBtn){
 	});
 }
 
-//detail_app_page.html
-//var lengthApp = apps.length - 1;
-//var getAppName = apps[lengthApp];
+// detail_app_page.html
+// var lengthApp = apps.length - 1;
+// var getAppName = apps[lengthApp];
 var appname = location.hash.substr(1);
 console.log(appname);
 if(appname){
@@ -82,24 +75,24 @@ $(function() {
 
 });
 
-$(function myFunction() {
-	var $myDropdown = document.getElementById("myDropdown")
-	if ($myDropdown) {
-		$myDropdown.classList.toggle("show");
-	}
-})
-//$("#wrapper").load("sidebar.html")
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-	if (!event.target.matches('.dropbtn')) {
-
-		var dropdowns = document.getElementsByClassName("dropdown-content");
-		var i;
-		for (i = 0; i < dropdowns.length; i++) {
-			var openDropdown = dropdowns[i];
-			if (openDropdown.classList.contains('show')) {
-				openDropdown.classList.remove('show');
-			}
-		}
-	}
-}
+// $(function myFunction() {
+// 	var $myDropdown = document.getElementById("myDropdown")
+// 	if ($myDropdown) {
+// 		$myDropdown.classList.toggle("show");
+// 	}
+// })
+// //$("#wrapper").load("sidebar.html")
+// // Close the dropdown menu if the user clicks outside of it
+// window.onclick = function(event) {
+// 	if (!event.target.matches('.dropbtn')) {
+//
+// 		var dropdowns = document.getElementsByClassName("dropdown-content");
+// 		var i;
+// 		for (i = 0; i < dropdowns.length; i++) {
+// 			var openDropdown = dropdowns[i];
+// 			if (openDropdown.classList.contains('show')) {
+// 				openDropdown.classList.remove('show');
+// 			}
+// 		}
+// 	}
+// }

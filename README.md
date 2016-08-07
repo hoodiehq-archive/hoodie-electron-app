@@ -12,9 +12,9 @@ After installing Node.js, we clone and install the electron-quick-start in our r
 
 ```bash
 # Clone this repository
-git clone https://github.com/Rookies-RGSOC2016/Hoodie-electron-demo
+git clone https://github.com/Rookies-RGSOC2016/hoodie-electron-demo
 # Go into the repository
-cd Hoodie-electron-demo
+cd hoodie-electron-demo
 # Install dependencies and run the app
 npm install && npm start
 ```

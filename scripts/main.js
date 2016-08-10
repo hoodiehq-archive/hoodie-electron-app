@@ -1,14 +1,10 @@
 var appsData = localStorage.getItem('apps');
 var apps = appsData ? JSON.parse(appsData) : [];
-//document.getElementById("new-app-btn").onclick = function () { $('#container2').hide()	 };
-//console.log("he ya");
- function showdetail() { $('#detail_app_page').show()	 };
- function hidetail() { $('#detail_app_page').hide()	 };
 $('body').on("click touchstart", "#new-app-btn", function(e){
-   $("#container2, #container1").toggle();
+  $("#container2, #container1, #detail_app_page").toggle();
 });
 $("#new-app-btn").on("click", function(){
-	document.querySelector("#create-app").style.display = "block";
+  document.querySelector("#create-app").style.display = "block";
 	//create an new app, when a user click 'create button'
 	var createBtn = document.querySelector("#choose-create");
 	if(createBtn){
@@ -34,8 +30,6 @@ $("#new-app-btn").on("click", function(){
 		});
 	}
 });
-
-
 //empty the text in the text field, when a user click the 'cancel button'
 var cancelBtn = document.querySelector("#cancel-create");
 if(cancelBtn){
@@ -43,8 +37,6 @@ if(cancelBtn){
 		$('#empty-text').val('');
 	});
 }
-
-
 //detail_app_page.html
 var appname = "";
 //https://api.jquerymobile.com/hashchange/
@@ -58,38 +50,24 @@ $( window ).on('hashchange',function() {
  // Since the event is only triggered when the hash changes, we need to trigger
  // the event now, to handle the hash the page may have loaded with.
 $(window).trigger('hashchange');
-
-
 //display exisiting apps
-for (i=0;i<apps.length;i++)
-{
- // var container = $('#container1');
- // var result = `<li class="list-group-item " >
- // 	<button type ="button" class="btn btn-lg btn-block"
- // 	onClick="self.location='detail_app_page.html#${apps[i].name}'">${apps[i].name}
- // 	<i class="glyphicon glyphicon-folder-open"></i></button>
- // </li>`
- // container.append(result);
- // //console.log($('<li>', container));
- // console.log('apps JSON.stringify:'+ apps[i].name);
-
- var container = $('#container1');
- var result = `<li class="list-group-item " >
-   <button type ="button" class="btn btn-lg btn-block"
-   onClick="showdetail()">${apps[i].name}
-   <i class="glyphicon glyphicon-folder-open"></i></button>
- </li>`
-container.append(result);
-//console.log($('<li>', container));
-console.log('apps JSON.stringify:'+ apps[i].name);
+for (i=0;i<apps.length;i++){
+  var container = $('#container1');
+  var result = `<li class="list-group-item " id="appbtns" >
+ 	<button type ="button" class="btn btn-lg btn-block"
+ 	onClick="self.location='detail_app_page.html#${apps[i].name}'">${apps[i].name}
+ 	<i class="glyphicon glyphicon-folder-open"></i></button>
+  </li>`
+  container.append(result);
+ //console.log($('<li>', container));
+ console.log('apps JSON.stringify:'+ apps[i].name);
 }
-
 $(function() {
 	//change app name
 	$('#js-change-appname').on('click', function () {
 		var changed = $('#rename-app').val();
 		$('#name-app').text( changed );
-    apps[i].name = changed
+    app.name = changed
 	});
 
 	//toggle start/stop button

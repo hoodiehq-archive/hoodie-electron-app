@@ -1,6 +1,12 @@
 var appsData = localStorage.getItem('apps');
 var apps = appsData ? JSON.parse(appsData) : [];
-
+//document.getElementById("new-app-btn").onclick = function () { $('#container2').hide()	 };
+//console.log("he ya");
+ function showdetail() { $('#detail_app_page').show()	 };
+ function hidetail() { $('#detail_app_page').hide()	 };
+$('body').on("click touchstart", "#new-app-btn", function(e){
+   $("#container2, #container1").toggle();
+});
 $("#new-app-btn").on("click", function(){
 	document.querySelector("#create-app").style.display = "block";
 	//create an new app, when a user click 'create button'
@@ -9,7 +15,7 @@ $("#new-app-btn").on("click", function(){
 		createBtn.addEventListener("click",function(){
 			//create app array for exisiting apps
 			var appname = document.querySelector("#empty-text").value;
-			debugger;
+			//debugger;
 			console.log('appname_value: '+ appname);
 			//save the appname to the local storage
 			var app = {name: appname};
@@ -54,18 +60,28 @@ $( window ).on('hashchange',function() {
 $(window).trigger('hashchange');
 
 
-//display exisiting apps in the sidebar
+//display exisiting apps
 for (i=0;i<apps.length;i++)
 {
+ // var container = $('#container1');
+ // var result = `<li class="list-group-item " >
+ // 	<button type ="button" class="btn btn-lg btn-block"
+ // 	onClick="self.location='detail_app_page.html#${apps[i].name}'">${apps[i].name}
+ // 	<i class="glyphicon glyphicon-folder-open"></i></button>
+ // </li>`
+ // container.append(result);
+ // //console.log($('<li>', container));
+ // console.log('apps JSON.stringify:'+ apps[i].name);
 
-	var container = $('#convoy_list');
-	var result = '<li role="presentation" class="divider"><li role="presentation">' +
-							 '<a href="detail_app_page.html#'+apps[i].name+'" class="button" role="menuitem" tabindex="-1" type="button" class="btn btn-secondary btn-sm btn-block">' +
-							 '<i class="glyphicon glyphicon-folder-open"></i> ' +
-							 apps[i].name + '</a></li></li>';
- container.append(result);
- //console.log($('<li>', container));
- console.log('apps JSON.stringify:'+ apps[i].name);
+ var container = $('#container1');
+ var result = `<li class="list-group-item " >
+   <button type ="button" class="btn btn-lg btn-block"
+   onClick="showdetail()">${apps[i].name}
+   <i class="glyphicon glyphicon-folder-open"></i></button>
+ </li>`
+container.append(result);
+//console.log($('<li>', container));
+console.log('apps JSON.stringify:'+ apps[i].name);
 }
 
 $(function() {
@@ -73,6 +89,7 @@ $(function() {
 	$('#js-change-appname').on('click', function () {
 		var changed = $('#rename-app').val();
 		$('#name-app').text( changed );
+    apps[i].name = changed
 	});
 
 	//toggle start/stop button

@@ -39,61 +39,120 @@
               <!-- New App menu-->
               <li class="list-group-item">
                 <button id="new-app-btn" type ="button" class="btn btn-lg btn-block">New App
-                <i class="glyphicon glyphicon-plus-sign pull-right"></i></button>
-              </li>
-            <!-- App1 menu-->
-              <li class="list-group-item">
-                <button type ="button" class="btn btn-lg btn-block"
-                onClick="self.location='detail_app_page.html'">App1
-                <i class="glyphicon glyphicon-play-circle pull-right"></i></button>
-              </li>
-              <!-- App2 menu-->
-              <li class="list-group-item">
-                <button type ="button" class="btn btn-lg btn-block"
-                onClick="self.location='detail_app_page.html'">App2
-                <i class="glyphicon glyphicon-play-circle pull-right"></i></button>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--end well and menu list -->
-
-
-    <!-- <div class="top-space"> -->
-    <!-- well, create app -->
-
-    <div class="container-fluid" id="create-app-container">
-      <div class ="well">
-        <div class="row">
-          <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <!-- create app-->
-            <h3 class="text-center">Let's create Hoodie App :D</h3>
-            <div class="form-actions">
-              <p class="label_size text-center">App Name</p>
-              <input id="empty-text" type="text" class="form-control from-size"
-              placeholder="Type your app name">
+                  <i class="glyphicon glyphicon-plus-sign pull-right"></i></button>
+                </li>
+                <!-- App1 menu-->
+                <li class="list-group-item">
+                  <button type ="button" class="btn btn-lg btn-block"
+                  onClick="self.location='detail_app_page.html'">App1
+                  <i class="glyphicon glyphicon-play-circle pull-right"></i></button>
+                </li>
+                <!-- App2 menu-->
+                <li class="list-group-item">
+                  <button type ="button" class="btn btn-lg btn-block"
+                  onClick="self.location='detail_app_page.html'">App2
+                  <i class="glyphicon glyphicon-play-circle pull-right"></i></button>
+                </li>
+              </ul>
             </div>
-            <button id="cancel-create" type="button"
-            class="btn btn_cancel pull-right btn_size_move">Cancel</button>
-            <button id="choose-create" type="submit"
-            class="btn btn-primary pull-right btn_size_move">create</button>
           </div>
         </div>
-        <!--end well, create app -->
+      </div>
+      <!--end well and menu list -->
+
+
+      <!-- <div class="top-space"> -->
+      <!-- well, create app -->
+
+      <div class="container-fluid" id="create-app-container">
+        <div class ="well">
+          <div class="row">
+            <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <!-- create app-->
+              <h3 class="text-center">Let's create Hoodie App :D</h3>
+              <div class="form-actions">
+                <p class="label_size text-center">App Name</p>
+                <input id="empty-text" type="text" class="form-control from-size"
+                placeholder="Type your app name">
+              </div>
+              <button id="cancel-create" type="button"
+              class="btn btn_cancel pull-right btn_size_move">Cancel</button>
+              <button id="choose-create" type="submit"
+              class="btn btn-primary pull-right btn_size_move">create</button>
+            </div>
+          </div>
+          <!--end well, create app -->
+        </div>
+      </div>
+
+      <!-- main nav: app name, back and edit buttons -->
+      <div class="row main-nav">
+        <div class="col-sm-4">
+          <button type="button" onClick="self.location='index.html'" class="btn btn-default pull-left">
+            <span class="glyphicon glyphicon-arrow-left"></span>
+          </button>
+        </div>
+        <div class="col-sm-4">
+          <p id="name-app" class="text-center"></p>
+        </div>
+        <div class="col-sm-4">
+          <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#renameForm">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </button>
+        </div>
+      </div>
+      <!-- end main nav -->
+
+      <!-- main content: stop/start button and links -->
+      <div class="well">
+        <!-- stop/start button -->
+        <button type="button" class="btn btn-default center-block main-button" id='main-button'>
+          <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start
+        </button>
+        <!-- main links -->
+        <ul class="list-group main-links">
+          <li class="list-group-item"><span class="glyphicon glyphicon-folder-open"></span> <a href="#">~Hoodie/testApp1</a></li>
+          <li class="list-group-item"><span class="glyphicon glyphicon-link"></span> <a href="#">http://localhost:6001/hoodie/bundle.js</a></li>
+          <li class="list-group-item"><span class="glyphicon glyphicon-globe"></span> <a href="#">http://localhost:6001</a></li>
+          <li class="list-group-item"><span class="glyphicon glyphicon-user"></span> <a href="#">http://localhost:6001/hoodie/admin</a></li>
+        </ul>
+      </div>
+      <!-- end main content -->
+
+      <!-- modal: change app name -->
+      <div class="modal fade" id="renameForm" tabindex="-1" role="dialog" aria-labelledby="renameFormLabel">
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title text-center" id="renameFromLabel">Change App Name</h4>
+            </div>
+            <div class="modal-body">
+              <form class="form-group">
+                <div class="control-group">
+                  <label class="control-label" for="rename-app">New App Name:</label>
+                  <input class="form-control" id="rename-app" type="text" placeholder="Rename App here...">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal" id="js-change-appname">Apply</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end modal -->
+
+      <div class="container-fluid">
+        <div class="footer">
+          <p class="text-center">Hoodie with &nbsp; <span class="glyphicon glyphicon-heart"></span></p>
+        </div>
       </div>
     </div>
 
-    <div class="container-fluid">
-      <div class="footer">
-        <p class="text-center">Hoodie with &nbsp; <span class="glyphicon glyphicon-heart"></span></p>
-      </div>
-    </div>
-  </div>
-
-  <script src="vendor/jquery-2.2.4.min.js"></script>
-  <script src="vendor/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
-  <script src="scripts/main.js"></script>
-</body>
-</html>
+    <script src="vendor/jquery-2.2.4.min.js"></script>
+    <script src="vendor/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+    <script src="scripts/main.js"></script>
+  </body>
+  </html>

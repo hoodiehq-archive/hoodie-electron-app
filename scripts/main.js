@@ -49,6 +49,7 @@ $("#new-app-btn").on("click", function(){
 var cancelBtn = document.querySelector("#cancel-create");
 if(cancelBtn){
 	cancelBtn.addEventListener("click",function(){
+		$("#apps-container,#create-app-container").toggle();
 		$('#empty-text').val('');
 	});
 }

@@ -1,18 +1,25 @@
 var appsData = localStorage.getItem('apps');
 var apps = appsData ? JSON.parse(appsData) : [];
 $('body').on("click touchstart", "#new-app-btn", function(e){
-  $("#container2, #container1, #detail_app_page").toggle();
+  $("#container1").hide()
+  $("#container2").show()
 });
+ // $('body').on("click touchstart", "#appbtns", function(e){
+ //   $("#container1, #detail_app_page").toggle();
+ // });
+function showdetail (){
+    $("#detail_app_page").show();
+    $("#container1").hide();
+};
 $("#new-app-btn").on("click", function(){
   document.querySelector("#create-app").style.display = "block";
 	//create an new app, when a user click 'create button'
 	var createBtn = document.querySelector("#choose-create");
 	if(createBtn){
 		createBtn.addEventListener("click",function(){
-			//create app array for exisiting apps
+			//create app array for the exisiting apps
 			var appname = document.querySelector("#empty-text").value;
-			//debugger;
-			console.log('appname_value: '+ appname);
+		  console.log('appname_value: '+ appname);
 			//save the appname to the local storage
 			var app = {name: appname};
 			if(app.name){
@@ -24,7 +31,8 @@ $("#new-app-btn").on("click", function(){
 				console.log('apps array:'+apps);
 				console.log('apps JSON.stringify:'+JSON.stringify(apps));
 				//redirect from index page to detail_app_page
-				var url = "detail_app_page.html#"+app.name;
+				// var url = "index.html#"+app.name;
+        var url = "index.html";
 				location.href = url;
 			}
 		});
@@ -53,9 +61,8 @@ $(window).trigger('hashchange');
 //display exisiting apps
 for (i=0;i<apps.length;i++){
   var container = $('#container1');
-  var result = `<li class="list-group-item " id="appbtns" >
- 	<button type ="button" class="btn btn-lg btn-block"
- 	onClick="self.location='detail_app_page.html#${apps[i].name}'">${apps[i].name}
+  var result = `<li class="list-group-item " id="appbtnss" >
+ 	<button type ="button" class="btn btn-lg btn-block" onclick="showdetail()">${apps[i].name}
  	<i class="glyphicon glyphicon-folder-open"></i></button>
   </li>`
   container.append(result);

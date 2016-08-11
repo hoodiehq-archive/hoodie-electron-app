@@ -130,6 +130,10 @@ span.glyphicon-cog
   display: none;
 }
 
+#detail-app-container{
+  display: none;
+}
+
 .top-space{
   padding-top: 30px;
 }

@@ -36,9 +36,9 @@ $("#new-app-btn").on("click", function(){
 				//window.location.replace("detail_app_page.html");
 				//Jquery
 				//localStorage.getItem('apps');
-				var url = "detail_app_page.html#"+app.name;
+				var url = "index.html#"+app.name;
 				$(location).attr('href',url);
-
+				$("#create-app-container,#detail-app-container").toggle();
 			}
 		});
 	}
@@ -54,35 +54,41 @@ if(cancelBtn){
 	});
 }
 
+var goBackBtn = document.querySelector("#goBackBtn");
+var appLists = document.querySelector("#appLists");
+if(goBackBtn){
+	goBackBtn.addEventListener("click",function(){
+    apps.forEach(function(app){
+			var $li = document.createElement('li');
+			$li.innerHTML = `
+				${apps.name || '-'}
+			`
+			appLists.appendChild($li);
+		});
+		console.log('apps JSON.stringify:'+ apps.name);
+		$("#apps-container,#create-app-container").toggle();
+	});
+}
+
+
+// for (i=0;i<apps.length;i++)
+// {
+// 	var container = $('#convoy_list');
+// 	var result = '<li role="presentation" class="divider"><li role="presentation">' +
+// 							 '<button role="menuitem" tabindex="-1" type="button" class="btn btn-secondary btn-sm btn-block">' +
+// 							 '<i class="glyphicon glyphicon-folder-open"></i> ' +
+// 							 apps[i].name + '</button></li></li>';
+//  container.append(result);
+//  //console.log($('<li>', container));
+//  console.log('apps JSON.stringify:'+ apps[i].name);
+//  $('#name-app').html(appname);
+// }
+
 //detail_app_page.html
 //var lengthApp = apps.length - 1;
 //var getAppName = apps[lengthApp];
 var appname = location.hash.substr(1);
 console.log(appname);
-// if(appname){
-// 	var container = $('#convoy_list');
-// 	var result = '<li role="presentation" class="divider"><li role="presentation">' +
-//                '<button role="menuitem" tabindex="-1" type="button" class="btn btn-secondary btn-sm btn-block">' +
-//                '<i class="glyphicon glyphicon-folder-open"></i> ' +
-// 							 appname + '</button></li></li>';
-// 	container.append(result);
-// 	console.log($('<li>', container));
-// 	console.log("if getName"+appname);
-// 	$('#name-app').html(appname);
-// }
-for (i=0;i<apps.length;i++)
-{
-
-	var container = $('#convoy_list');
-	var result = '<li role="presentation" class="divider"><li role="presentation">' +
-							 '<button role="menuitem" tabindex="-1" type="button" class="btn btn-secondary btn-sm btn-block">' +
-							 '<i class="glyphicon glyphicon-folder-open"></i> ' +
-							 apps[i].name + '</button></li></li>';
- container.append(result);
- //console.log($('<li>', container));
- console.log('apps JSON.stringify:'+ apps[i].name);
- $('#name-app').html(appname);
-}
 
 $(function() {
 	//change app name
@@ -102,38 +108,3 @@ $(function() {
 	});
 
 });
-//
-// $('#convoy_list').on("click", function Display(){
-//
-//     var listId=$(JSON.parse(localStorage.getItem("apps"+i)));
-//     var select= $('#convoy_list');
-// 		var container = $(this).closest('.container-fluid');
-// 		var app_name = $('#empty-text', container).val();
-// 		$('<li>', $(this)).appendTo(apps.name);
-// 		console.log(apps);
-//
-//
-// });
-
-
-// $(function myFunction() {
-// 	var $myDropdown = document.getElementById("myDropdown")
-// 	if ($myDropdown) {
-// 		$myDropdown.classList.toggle("show");
-// 	}
-// })
-// //$("#wrapper").load("sidebar.html")
-// // Close the dropdown menu if the user clicks outside of it
-// window.onclick = function(event) {
-// 	if (!event.target.matches('.dropbtn')) {
-//
-// 		var dropdowns = document.getElementsByClassName("dropdown-content");
-// 		var i;
-// 		for (i = 0; i < dropdowns.length; i++) {
-// 			var openDropdown = dropdowns[i];
-// 			if (openDropdown.classList.contains('show')) {
-// 				openDropdown.classList.remove('show');
-// 			}
-// 		}
-// 	}
-// }

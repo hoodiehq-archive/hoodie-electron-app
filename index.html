@@ -13,72 +13,9 @@
 
   <script src="vendor/modernizr.js"></script>
 
-  </head>
+</head>
 <body>
-
-  <!-- <div id="wrapper">
-    <div id="sidebar-wrapper">
-      <div id="page-content-wrapper">
-        <ul class="sidebar-nav">
-          <li class = "inner-addon left-addon">
-            <form method="get" action="/search" id="search">
-              <i class="glyphicon glyphicon-search"></i>
-              <input name="q" type="text" size="40" placeholder="Search..." />
-            </form><br>
-          </li>
-          <li class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-              Applicatons <span class="caret"></span></button>
-              <ul id="convoy_list" class="dropdown-menu" role="menu" aria-labelledby="menu1">
-
-
-                
-                  <button role="menuitem" tabindex="-1" type ="button" class="btn btn-secondary btn-sm btn-block"
-                  onClick="self.location='detail_app_page.html'">
-                  <i class="glyphicon glyphicon-folder-open"></i> App </button>
-                </li> -->
-              <!-- </li>
-            </ul>
-            <li class=""><span class=""></span> <a href="#">Documentation</a></li>
-            <li class=""><span class=""></span> <a href="#">Other </a></li>
-            <li class=""><span class=""></span> <a href="#">Contact us</a></li>
-
-          </ul>
-        </div>
-      </div>
-    </div> --> -->
-
-
   <div class="container">
-    <!-- navbar: logo img, setting and close buttons -->
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed"
-          data-toggle="collapse" data-target="#navbar-submenu-collapse"
-          aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-
-          <!-- brand : Hoodie Logo-->
-          <a class="navbar-brand navbar-left logo_align" href="#">
-            <img img src="images/logo.png" alt="HoodieLogo">
-          </a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="navbar-submenu-collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><button class="nav-button"><span class="glyphicon glyphicon-cog"></span></button></li>
-            <li><button class="nav-button"><span class="glyphicon glyphicon-remove-circle"></span></button></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- end navbar -->
 
     <!-- main nav: welcome message, back and edit buttons -->
     <div class="row main-nav">
@@ -93,72 +30,70 @@
     <!-- end main nav -->
 
     <!-- well and menu list -->
-    <div class ="well">
-      <div class="container-fluid">
-        <ul class ="list-group">
-          <div class="row">
-            <div class = "col-md-4 col-lg-4">
-              <div id="convoy_list1" class="content-left">
-                <!-- App1 menu-->
-                <li class="list-group-item">
-                  <button type ="button" class="btn btn-primary btn-lg btn-block"
-                  onClick="self.location='detail_app_page.html'">App1
-                  <i class="glyphicon glyphicon-play-circle pull-right"></i></button>
-                </li>
-                <!-- App2 menu-->
-                <li class="list-group-item">
-                  <button type ="button" class="btn btn-primary btn-lg btn-block"
-                  onClick="self.location='detail_app_page.html'">App2
-                  <i class="glyphicon glyphicon-play-circle pull-right"></i></button>
-                </li>
-              </div>
-            </div>
-            <div class="content-right">
-              <div class= "col-md-8 col-lg-8">
-                <!-- New App menu-->
-                <li class="list-group-item">
-                  <button id="new-app-btn" type ="button"
-                  class="btn btn-primary btn-lg btn-block">New App
-                  <i class="glyphicon glyphicon-plus-sign pull-right"></i></button>
-                </li>
-                <div id="create-app" class="top-space">
-                  <!-- well, create app -->
-                  <div class ="well">
-                    <div class="container-fluid">
-                      <!-- create app-->
-                      <h3 class="text-center">Let's create Hoodie App :D</h3>
-                      <div class="form-actions">
-                        <p class="label_size text-center">App Name</p>
-                        <input id="empty-text" type="text" class="form-control from-size"
-                        placeholder="Type your app name">
-                      </div>
-                      <button id="cancel-create"type="button"
-                      class="btn btn_cancel pull-right btn_size_move">Cancel</button>
-                      <button id="choose-create" type="submit"
-                      class="btn btn-primary pull-right btn_size_move">create</button>
-                    </div>
-                  </div>
-                  <!--end well, create app -->
-                </div>
-              </div>
-            </div>
+
+    <div class="container-fluid" id="apps-container">
+      <div class ="well">
+        <div class="row">
+          <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class ="list-group">
+              <!-- New App menu-->
+              <li class="list-group-item">
+                <button id="new-app-btn" type ="button" class="btn btn-lg btn-block">New App
+                <i class="glyphicon glyphicon-plus-sign pull-right"></i></button>
+              </li>
+            <!-- App1 menu-->
+              <li class="list-group-item">
+                <button type ="button" class="btn btn-lg btn-block"
+                onClick="self.location='detail_app_page.html'">App1
+                <i class="glyphicon glyphicon-play-circle pull-right"></i></button>
+              </li>
+              <!-- App2 menu-->
+              <li class="list-group-item">
+                <button type ="button" class="btn btn-lg btn-block"
+                onClick="self.location='detail_app_page.html'">App2
+                <i class="glyphicon glyphicon-play-circle pull-right"></i></button>
+              </li>
+            </ul>
           </div>
         </div>
-      </ul>
+      </div>
+    </div>
+    <!--end well and menu list -->
+
+
+    <!-- <div class="top-space"> -->
+    <!-- well, create app -->
+
+    <div class="container-fluid" id="create-app-container">
+      <div class ="well">
+        <div class="row">
+          <div class = "col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <!-- create app-->
+            <h3 class="text-center">Let's create Hoodie App :D</h3>
+            <div class="form-actions">
+              <p class="label_size text-center">App Name</p>
+              <input id="empty-text" type="text" class="form-control from-size"
+              placeholder="Type your app name">
+            </div>
+            <button id="cancel-create" type="button"
+            class="btn btn_cancel pull-right btn_size_move">Cancel</button>
+            <button id="choose-create" type="submit"
+            class="btn btn-primary pull-right btn_size_move">create</button>
+          </div>
+        </div>
+        <!--end well, create app -->
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="footer">
+        <p class="text-center">Hoodie with &nbsp; <span class="glyphicon glyphicon-heart"></span></p>
+      </div>
     </div>
   </div>
-  <!--end well and menu list -->
 
-
-  <div class="container-fluid">
-    <div class="footer">
-      <p class="text-center">Hoodie with &nbsp; <span class="glyphicon glyphicon-heart"></span></p>
-    </div>
-  </div>
-</div>
-
-<script src="vendor/jquery-2.2.4.min.js"></script>
-<script src="vendor/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
-<script src="scripts/main.js"></script>
+  <script src="vendor/jquery-2.2.4.min.js"></script>
+  <script src="vendor/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+  <script src="scripts/main.js"></script>
 </body>
 </html>

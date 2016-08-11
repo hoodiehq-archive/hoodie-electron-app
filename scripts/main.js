@@ -13,7 +13,7 @@ var apps = appsData ? JSON.parse(appsData) : [];
 // testing
 //var apps = JSON.parse(localStorage.getItem('apps')) || [];
 $("#new-app-btn").on("click", function(){
-	document.querySelector("#create-app").style.display = "block";
+	$("#apps-container,#create-app-container").toggle();
 	//create an new app, when a user click 'create button'
 	var createBtn = document.querySelector("#choose-create");
 	if(createBtn){

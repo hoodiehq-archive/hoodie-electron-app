@@ -21,10 +21,12 @@ $("#new-app-btn").on("click", function(){
 			if(app.name){
 				// console.log('appname_localstorage: '+ appname);
 				//localStorage.setItem("app-name", appname);
+				//call a function(appLists)?
 				apps.push(app);
 				console.log(app);
 				//localStorage.setItem('apps', apps);
 				localStorage.setItem('apps', JSON.stringify(apps));
+
 				console.log('apps array:'+apps);
 				console.log('apps JSON.stringify:'+JSON.stringify(apps));
 
@@ -38,17 +40,29 @@ $("#new-app-btn").on("click", function(){
 	}
 });
 
+// make it as a function
 var appLists = document.querySelector("#appLists");
 apps.forEach(function(app){
+	console.log(app);
 	var $li = document.createElement('li');
+	$li.className = 'list-group-item';
+	$li.setAttribute('id', app.id);
 	//$li.textContent = app.name || '-';
-	$li.innerHTML = `<li class="list-group-item">
+	$li.innerHTML = `
 	<button type ="button" class="btn btn-lg btn-block">${app.name || '-'}
 	<i class="glyphicon glyphicon-play-circle pull-right"></i></button>
-	</li>`
+	`
 	appLists.appendChild($li);
 });
 
+// data-id="dzz1otm"
+// var id = li.dataset.id
+$("#appLists").on("click","li",function(event){
+	var li = event.currentTarget;
+	console.log(li);
+	var id = $(li).attr('id');
+	console.log(id);
+});
 
 //var appClicked = document.querySelector("${app.name}");
 //$("#detail-app-container").show();
@@ -100,12 +114,21 @@ $(function() {
 
 	//toggle start/stop button
 	$('#main-button').on('click', function () {
-		var $el = $(this),
-		textNode = this.lastChild;
+		var $el = $(this);
+		var label;
+		//textNode = this.lastChild;
 
 		$el.find('span').toggleClass('glyphicon-play glyphicon-stop');
-		textNode.nodeValue = ($el.hasClass('main-button') ? 'Stop' : 'Start')
 		$el.toggleClass('main-button');
+		//check
+		if( $el.text() === 'Start'){
+			$("#link-details").show();
+		}else if( $el.text() === 'Stop'){
+			$("#link-details").hide();
+		}
+		//change
+		label = ($el.hasClass('main-button') ? 'Stop' : 'Start')
+		$el.text(label);
 	});
 
 });

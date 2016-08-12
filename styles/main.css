@@ -140,6 +140,10 @@ span.glyphicon-cog
   display: none;
 }
 
+#link-details{
+  display: none;
+}
+
 .top-space{
   padding-top: 30px;
 }

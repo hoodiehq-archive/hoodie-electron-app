@@ -4,20 +4,25 @@ var apps = appsData ? JSON.parse(appsData) : [];
 $("#new-app-btn").on("click", function(){
 	//$("#apps-container,#create-app-container").toggle();
 	$("#apps-container").hide();
-  $("#create-app-container").show();
+	$("#create-app-container").show();
 	//create an new app, when a user click 'create button'
 	var createBtn = document.querySelector("#choose-create");
 	if(createBtn){
 		createBtn.addEventListener("click",function(){
 			//create app array for exisiting apps
 			var appname = document.getElementsByTagName("input")[0].value;
+			var id = Math.random().toString(36).substr(2, 7);
 			console.log('appname_value: '+ appname);
+
 			//save the appname to the local storage
-			var app = {name: appname};
+			var app = {id : id, name: appname};
+			//app.dataset.id = id;
+			console.log(id);
 			if(app.name){
 				// console.log('appname_localstorage: '+ appname);
 				//localStorage.setItem("app-name", appname);
 				apps.push(app);
+				console.log(app);
 				//localStorage.setItem('apps', apps);
 				localStorage.setItem('apps', JSON.stringify(apps));
 				console.log('apps array:'+apps);
@@ -25,6 +30,8 @@ $("#new-app-btn").on("click", function(){
 
 				var url = "index.html#"+app.name;
 				$(location).attr('href',url);
+				$('#name-app').html(appname);
+				$('#folder').html('~Hoodie/'+appname);
 				$("#create-app-container,#detail-app-container").toggle();
 			}
 		});
@@ -41,6 +48,10 @@ apps.forEach(function(app){
 	</li>`
 	appLists.appendChild($li);
 });
+
+
+//var appClicked = document.querySelector("${app.name}");
+//$("#detail-app-container").show();
 
 //empty the text in the text field, when a user click the 'cancel button'
 var cancelBtn = document.querySelector("#cancel-create");
@@ -84,6 +95,7 @@ $(function() {
 	$('#js-change-appname').on('click', function () {
 		var changed = $('#rename-app').val();
 		$('#name-app').text( changed );
+		$('#folder').text('~Hoodie/'+changed);
 	});
 
 	//toggle start/stop button

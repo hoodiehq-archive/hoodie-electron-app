@@ -50,7 +50,6 @@ var cancelBtn = document.querySelector("#cancel-create");
 if(cancelBtn){
 	cancelBtn.addEventListener("click",function(){
 		$("#apps-container,#create-app-container").toggle();
-		$('#empty-text').val('');
 	});
 }
 
@@ -60,12 +59,9 @@ if(goBackBtn){
 	goBackBtn.addEventListener("click",function(){
     apps.forEach(function(app){
 			var $li = document.createElement('li');
-			$li.innerHTML = `
-				${apps.name || '-'}
-			`
+			$li.textContent = app.name || '-';
 			appLists.appendChild($li);
 		});
-		console.log('apps JSON.stringify:'+ apps.name);
 		$("#apps-container,#create-app-container").toggle();
 	});
 }

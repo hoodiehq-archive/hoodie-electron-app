@@ -116,6 +116,12 @@ span.glyphicon-cog
   margin: 0 auto;
 }
 
+.list-group
+{
+    list-style-type: none;
+}
+
+
 .list-group-item {
   padding-left: 20px;
 }

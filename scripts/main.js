@@ -1,19 +1,10 @@
-//$("#wrapper").load("sidebar.html")
-//index.html
-//display the creat app element, when a user click the new app button
-// var apps;
-// if ((typeof localStorage.getItem('apps') !== "undefined") &&
-//  (localStorage.getItem('apps') !== null))
-// 	apps = JSON.parse(localStorage.getItem('apps'));
-// else {
-// 	apps = [];
-// }
 var appsData = localStorage.getItem('apps');
 var apps = appsData ? JSON.parse(appsData) : [];
-// testing
-//var apps = JSON.parse(localStorage.getItem('apps')) || [];
+
 $("#new-app-btn").on("click", function(){
-	$("#apps-container,#create-app-container").toggle();
+	//$("#apps-container,#create-app-container").toggle();
+	$("#apps-container").hide();
+  $("#create-app-container").show();
 	//create an new app, when a user click 'create button'
 	var createBtn = document.querySelector("#choose-create");
 	if(createBtn){
@@ -31,11 +22,7 @@ $("#new-app-btn").on("click", function(){
 				localStorage.setItem('apps', JSON.stringify(apps));
 				console.log('apps array:'+apps);
 				console.log('apps JSON.stringify:'+JSON.stringify(apps));
-				//redirect from index page to detail_app_page
-				//JS
-				//window.location.replace("detail_app_page.html");
-				//Jquery
-				//localStorage.getItem('apps');
+
 				var url = "index.html#"+app.name;
 				$(location).attr('href',url);
 				$("#create-app-container,#detail-app-container").toggle();
@@ -44,28 +31,34 @@ $("#new-app-btn").on("click", function(){
 	}
 });
 
+var appLists = document.querySelector("#appLists");
+apps.forEach(function(app){
+	var $li = document.createElement('li');
+	//$li.textContent = app.name || '-';
+	$li.innerHTML = `<li class="list-group-item">
+	<button type ="button" class="btn btn-lg btn-block">${app.name || '-'}
+	<i class="glyphicon glyphicon-play-circle pull-right"></i></button>
+	</li>`
+	appLists.appendChild($li);
+});
 
 //empty the text in the text field, when a user click the 'cancel button'
 var cancelBtn = document.querySelector("#cancel-create");
 if(cancelBtn){
 	cancelBtn.addEventListener("click",function(){
-		$("#apps-container,#create-app-container").toggle();
+		//$("#apps-container,#create-app-container").toggle();
 	});
 }
 
 var goBackBtn = document.querySelector("#goBackBtn");
-var appLists = document.querySelector("#appLists");
 if(goBackBtn){
 	goBackBtn.addEventListener("click",function(){
-    apps.forEach(function(app){
-			var $li = document.createElement('li');
-			$li.textContent = app.name || '-';
-			appLists.appendChild($li);
-		});
-		$("#apps-container,#create-app-container").toggle();
+		//$("#apps-container,#create-app-container").toggle();
+		$("#apps-container").show();
+		$("#create-app-container").hide();
+		$("#detail-app-container").hide();
 	});
 }
-
 
 // for (i=0;i<apps.length;i++)
 // {

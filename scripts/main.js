@@ -23,6 +23,7 @@ $("#new-app-btn").on("click", function(){
 				//localStorage.setItem("app-name", appname);
 				//call a function(appLists)?
 				apps.push(app);
+				makeAppList();
 				console.log(app);
 				//localStorage.setItem('apps', apps);
 				localStorage.setItem('apps', JSON.stringify(apps));
@@ -32,6 +33,7 @@ $("#new-app-btn").on("click", function(){
 
 				var url = "index.html#"+app.name;
 				$(location).attr('href',url);
+				console.log("loc:" + location);
 				$('#name-app').html(appname);
 				$('#folder').html('~Hoodie/'+appname);
 				$("#create-app-container,#detail-app-container").toggle();
@@ -40,20 +42,27 @@ $("#new-app-btn").on("click", function(){
 	}
 });
 
-// make it as a function
-var appLists = document.querySelector("#appLists");
-apps.forEach(function(app){
-	console.log(app);
-	var $li = document.createElement('li');
-	$li.className = 'list-group-item';
-	$li.setAttribute('id', app.id);
-	//$li.textContent = app.name || '-';
-	$li.innerHTML = `
-	<button type ="button" class="btn btn-lg btn-block">${app.name || '-'}
-	<i class="glyphicon glyphicon-play-circle pull-right"></i></button>
-	`
-	appLists.appendChild($li);
+// show apps list in html once the document is ready
+$(document).ready(function(){
+	makeAppList();
 });
+
+function makeAppList() {
+	var appLists = document.querySelector("#appLists");
+	apps.forEach(function(app){
+		console.log(app);
+		var $li = document.createElement('li');
+		$li.className = 'list-group-item';
+		$li.setAttribute('id', app.id);
+		//$li.textContent = app.name || '-';
+		$li.innerHTML = `
+		<button type ="button" class="btn btn-lg btn-block">${app.name || '-'}
+		<i class="glyphicon glyphicon-play-circle pull-right"></i></button>
+		`;
+		appLists.appendChild($li);
+	});
+}
+
 
 // data-id="dzz1otm"
 // var id = li.dataset.id

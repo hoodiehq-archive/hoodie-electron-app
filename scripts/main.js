@@ -8,7 +8,7 @@ $("#new-app-btn").on("click", function(){
 	//create an new app, when a user click 'create button'
 	var createBtn = document.querySelector("#choose-create");
 	if(createBtn){
-		createBtn.addEventListener("click",function(){
+		  createBtn.addEventListener("click",function(){
 			//create app array for exisiting apps
 			var appname = document.getElementsByTagName("input")[0].value;
 			var id = Math.random().toString(36).substr(2, 7);
@@ -20,28 +20,49 @@ $("#new-app-btn").on("click", function(){
 			console.log(id);
 			if(app.name){
 				// console.log('appname_localstorage: '+ appname);
-				//localStorage.setItem("app-name", appname);
-				//call a function(appLists)?
+				// localStorage.setItem("app-name", appname);
+				// call a function(appLists)?
 				apps.push(app);
 				makeAppList();
 				console.log(app);
 				//localStorage.setItem('apps', apps);
 				localStorage.setItem('apps', JSON.stringify(apps));
-
+				showAppDetail(app.id);
 				console.log('apps array:'+apps);
 				console.log('apps JSON.stringify:'+JSON.stringify(apps));
-
-				var url = "index.html#"+app.name;
-				$(location).attr('href',url);
-				console.log("loc:" + location);
-				$('#name-app').html(appname);
-				$('#folder').html('~Hoodie/'+appname);
-				$("#create-app-container,#detail-app-container").toggle();
 			}
 		});
 	}
 });
 
+function showAppDetail(id) {
+	var app = appById(id);
+	var url = "index.html#"+app.name;
+	$(location).attr('href',url);
+	console.log("loc:" + location);
+	$('#name-app').html(app.name);
+	$('#folder').html('~Hoodie/'+app.name);
+	$("#create-app-container,#detail-app-container").toggle();
+}
+
+function appById(id) {
+	// v1
+	var findApp = function(app) {
+		return app.id === id;
+	};
+	return apps.find(findApp);
+	// v2
+	// return apps.find(function (app) {
+	// 	return app.id === id;
+	// });
+	// v3
+	// return apps.find((app) => app.id === id);
+	// v4
+	// for (var i = 0; i < apps.length; i++) {
+	// 	if (apps[i].id === id)
+	// 		return apps[i];
+	// 	}
+}
 // show apps list in html once the document is ready
 $(document).ready(function(){
 	makeAppList();
@@ -71,6 +92,9 @@ $("#appLists").on("click","li",function(event){
 	console.log(li);
 	var id = $(li).attr('id');
 	console.log(id);
+	$("#apps-container").hide();
+	$("#create-app-container").show();
+	showAppDetail(id);
 });
 
 //var appClicked = document.querySelector("${app.name}");
@@ -124,20 +148,24 @@ $(function() {
 	//toggle start/stop button
 	$('#main-button').on('click', function () {
 		var $el = $(this);
-		var label;
-		//textNode = this.lastChild;
 
+		//textNode = this.lastChild;
+		console.log($el);
+		console.log($el.text());
+		console.log($el.text().trim() + " ? " + 'Start');
+		console.log($el.text() === 'Start');
+		console.log($el.text().trim() === 'Start');
 		$el.find('span').toggleClass('glyphicon-play glyphicon-stop');
 		$el.toggleClass('main-button');
 		//check
-		if( $el.text() === 'Start'){
+		if( $el.text().trim() === 'Start'){
 			$("#link-details").show();
-		}else if( $el.text() === 'Stop'){
+		}else if( $el.text().trim() === 'Stop'){
 			$("#link-details").hide();
 		}
-		//change
-		label = ($el.hasClass('main-button') ? 'Stop' : 'Start')
-		$el.text(label);
+		// change
+		var label = $el.text().trim() === 'Start' ? 'Stop' : 'Start';
+		$el.find('span').text(label);
 	});
 
 });

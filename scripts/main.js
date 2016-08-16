@@ -5,10 +5,11 @@ $("#new-app-btn").on("click", function(){
 	//$("#apps-container,#create-app-container").toggle();
 	$("#apps-container").hide();
 	$("#create-app-container").show();
+	$("#detail-app-container").hide();
 	//create an new app, when a user click 'create button'
 	var createBtn = document.querySelector("#choose-create");
 	if(createBtn){
-		  createBtn.addEventListener("click",function(){
+		  createBtn.addEventListener("click",function(event){
 			//create app array for exisiting apps
 			var appname = document.getElementsByTagName("input")[0].value;
 			var id = Math.random().toString(36).substr(2, 7);
@@ -105,6 +106,7 @@ var cancelBtn = document.querySelector("#cancel-create");
 if(cancelBtn){
 	cancelBtn.addEventListener("click",function(){
 		//$("#apps-container,#create-app-container").toggle();
+		$("#apps-container").show();
 	});
 }
 

@@ -3,10 +3,10 @@
 // STORE REFERENCES TO HTML ELEMENTS
 var $showNewAppFormButton = $('#new-app-btn')
 var $newAppForm = $('#form-new-app')
+var $updateAppForm = $('#form-update-app')
 var $cancelNewAppFormButton = $('#cancel-create')
 var $appList = $('#appLists')
 var $goBackButton = $('#goBackBtn')
-var $submitAppChangeFormButton = $('#js-change-appname')
 var $startStopAppButton = $('#main-button')
 var $appListContainer = $('#apps-container')
 var $createAppFormContainer = $('#create-app-container')
@@ -60,10 +60,12 @@ $goBackButton.on('click', function () {
   $appDetailContainer.hide()
 })
 
-$submitAppChangeFormButton.on('click', function () {
+$updateAppForm.on('submit', function (event) {
+  event.preventDefault()
   var changed = $('#rename-app').val()
   $('#name-app').text(changed)
   $('#folder').text('~Hoodie/' + changed)
+  $updateAppForm.closest('.modal').modal('hide')
 })
 
 // toggle start/stop button

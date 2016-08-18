@@ -79,7 +79,7 @@
           <p id="name-app" class="text-center"></p>
         </div>
         <div class="col-sm-4">
-          <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#renameForm">
+          <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#renameModal">
             <span class="glyphicon glyphicon-pencil"></span>
           </button>
         </div>
@@ -100,9 +100,9 @@
       </div>
       <!-- end main content -->
       <!-- modal: change app name -->
-      <div class="modal fade" id="renameForm" tabindex="-1" role="dialog" aria-labelledby="renameFormLabel">
+      <div class="modal fade" id="renameModal" tabindex="-1" role="dialog" aria-labelledby="renameModalLabel">
         <div class="modal-dialog modal-sm" role="document">
-          <div class="modal-content">
+          <form class="modal-content" id="form-update-app">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -110,18 +110,16 @@
               <h4 class="modal-title text-center" id="renameFromLabel">Change App Name</h4>
             </div>
             <div class="modal-body">
-              <form class="form-group">
-                <div class="control-group">
-                  <label class="control-label" for="rename-app">New App Name:</label>
-                  <input class="form-control" id="rename-app" type="text" placeholder="Rename App here...">
-                </div>
-              </form>
+              <div class="control-group">
+                <label class="control-label" for="rename-app">New App Name:</label>
+                <input class="form-control" id="rename-app" type="text" placeholder="Rename App here...">
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal" id="js-change-appname">Apply</button>
+              <button type="submit" class="btn btn-primary" id="js-change-appname">Apply</button>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </section>

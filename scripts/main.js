@@ -2,7 +2,7 @@
 
 // STORE REFERENCES TO HTML ELEMENTS
 var $showNewAppFormButton = $('#new-app-btn')
-var $submitNewAppFormButton = $('#choose-create')
+var $newAppForm = $('#form-new-app')
 var $cancelNewAppFormButton = $('#cancel-create')
 var $appList = $('#appLists')
 var $goBackButton = $('#goBackBtn')
@@ -21,7 +21,9 @@ $showNewAppFormButton.on('click', function () {
   $('#detail-app-container').hide()
 })
 
-$submitNewAppFormButton.on('click', function (event) {
+$newAppForm.on('submit', function (event) {
+  event.preventDefault()
+
   // create app array for exisiting apps
   var appname = $('#empty-text').val()
   var app = {

@@ -51,13 +51,17 @@
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <!-- create app-->
-            <h3 class="text-center">Let's create Hoodie App :D</h3>
-            <div class="form-actions">
-              <p class="label_size text-center">App Name</p>
-              <input id="empty-text" type="text" class="form-control from-size" placeholder="Type your app name">
-            </div>
-            <button id="cancel-create" type="button" class="btn btn_cancel pull-right btn_size_move">Cancel</button>
-            <button id="choose-create" type="submit" class="btn btn-primary pull-right btn_size_move">create</button>
+            <form class="form-group" id="form-new-app">
+              <h3 class="text-center">Let's create Hoodie App :D</h3>
+              <div class="control-group">
+                <label class="control-label" for="empty-text">App Name</label>
+                <input id="empty-text" type="text" class="form-control from-size" placeholder="Type your app name">
+              </div>
+              <div class="form-actions">
+                <button id="cancel-create" type="button" class="btn btn_cancel pull-right btn_size_move">Cancel</button>
+                <button id="choose-create" type="submit" class="btn btn-primary pull-right btn_size_move">create</button>
+              </div>
+            </form>
           </div>
         </div>
         <!--end well, create app -->

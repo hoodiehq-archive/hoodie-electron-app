@@ -1,13 +1,27 @@
 /* global $, applist, location */
-$('#new-app-btn').on('click', function () {
+
+// STORE REFERENCES TO HTML ELEMENTS
+var $showNewAppFormButton = $('#new-app-btn')
+var $submitNewAppFormButton = $('#choose-create')
+var $cancelNewAppFormButton = $('#cancel-create')
+var $appList = $('#appLists')
+var $goBackButton = $('#goBackBtn')
+var $submitAppChangeFormButton = $('#js-change-appname')
+var $startStopAppButton = $('#main-button')
+
+// INIT APP
+$(document).ready(function () {
+  makeAppList()
+})
+
+// EVENT HANDLERS
+$showNewAppFormButton.on('click', function () {
   $('#apps-container').hide()
   $('#create-app-container').show()
   $('#detail-app-container').hide()
 })
 
-// create an new app, when a user click 'create button'
-var $createBtn = $('#choose-create')
-$createBtn.on('click', function (event) {
+$submitNewAppFormButton.on('click', function (event) {
   // create app array for exisiting apps
   var appname = $('#empty-text').val()
   var app = {
@@ -24,6 +38,48 @@ $createBtn.on('click', function (event) {
   }
 })
 
+$cancelNewAppFormButton.on('click', function () {
+  $('#apps-container,#create-app-container').toggle()
+})
+
+$appList.on('click', 'li', function (event) {
+  var li = event.currentTarget
+  var id = $(li).attr('id')
+  $('#apps-container').hide()
+  $('#create-app-container').show()
+  showAppDetail(id)
+})
+
+$goBackButton.on('click', function () {
+  $('#apps-container').show()
+  $('#create-app-container').hide()
+  $('#detail-app-container').hide()
+})
+
+$submitAppChangeFormButton.on('click', function () {
+  var changed = $('#rename-app').val()
+  $('#name-app').text(changed)
+  $('#folder').text('~Hoodie/' + changed)
+})
+
+// toggle start/stop button
+$startStopAppButton.on('click', function () {
+  var $el = $(this)
+  $el.find('span').toggleClass('glyphicon-play glyphicon-stop')
+  $el.toggleClass('main-button')
+  // check
+  if ($el.text().trim() === 'Start') {
+    $('#link-details').show()
+  } else if ($el.text().trim() === 'Stop') {
+    $('#link-details').hide()
+  }
+  // change
+  var label = $el.text().trim() === 'Start' ? 'Stop' : 'Start'
+  $el.find('span').text(label)
+})
+
+// HELPER METHODS
+
 function showAppDetail (id) {
   applist.find(id)
 
@@ -34,13 +90,8 @@ function showAppDetail (id) {
     $('#create-app-container,#detail-app-container').toggle()
   })
 }
-// show apps list in html once the document is ready
-$(document).ready(function () {
-  makeAppList()
-})
 
 function makeAppList () {
-  var $appLists = $('#appLists')
   applist.findAll()
     .then(function (apps) {
       apps.forEach(function (app) {
@@ -52,56 +103,7 @@ function makeAppList () {
             </button>
           </li>
         `
-        $appLists.append(html)
+        $appList.append(html)
       })
     })
 }
-
-$('#appLists').on('click', 'li', function (event) {
-  var li = event.currentTarget
-  var id = $(li).attr('id')
-  $('#apps-container').hide()
-  $('#create-app-container').show()
-  showAppDetail(id)
-})
-
-// empty the text in the text field, when a user click the 'cancel button'
-var $cancelBtn = $('#cancel-create')
-$cancelBtn.on('click', function () {
-  $('#apps-container,#create-app-container').toggle()
-})
-
-var $goBackBtn = $('#goBackBtn')
-$goBackBtn.on('click', function () {
-  $('#apps-container').show()
-  $('#create-app-container').hide()
-  $('#detail-app-container').hide()
-})
-
-var appId = location.hash.substr(1)
-console.log(appId)
-
-$(function () {
-  // change app name
-  $('#js-change-appname').on('click', function () {
-    var changed = $('#rename-app').val()
-    $('#name-app').text(changed)
-    $('#folder').text('~Hoodie/' + changed)
-  })
-
-  // toggle start/stop button
-  $('#main-button').on('click', function () {
-    var $el = $(this)
-    $el.find('span').toggleClass('glyphicon-play glyphicon-stop')
-    $el.toggleClass('main-button')
-    // check
-    if ($el.text().trim() === 'Start') {
-      $('#link-details').show()
-    } else if ($el.text().trim() === 'Stop') {
-      $('#link-details').hide()
-    }
-    // change
-    var label = $el.text().trim() === 'Start' ? 'Stop' : 'Start'
-    $el.find('span').text(label)
-  })
-})

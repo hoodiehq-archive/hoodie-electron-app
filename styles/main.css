@@ -5,52 +5,12 @@ body {
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
 .footer {
   padding-left: 15px;
   padding-right: 15px;
-}
-
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-
-  /* Make the masthead heading the same height as the navigation */
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
-  }
-}
-
-/* Custom page footer */
-.footer {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
-}
-
-.container-narrow > hr {
-  margin: 30px 0;
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
-  border-bottom: 1px solid #e5e5e5;
-  .btn {
-    font-size: 18px;
-    padding: 14px 24px;
-  }
-}
-
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-  p + h4 {
-    margin-top: 28px;
-  }
 }
 
 /* Responsive: Portrait tablets and up */
@@ -60,21 +20,9 @@ body {
   }
 
   /* Remove the padding we set earlier */
-  .header,
-  .marketing,
   .footer {
     padding-left: 0;
     padding-right: 0;
-  }
-
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
   }
 }
 
@@ -84,18 +32,8 @@ body {
   padding-right: 0;
 }
 
-.nav-button {
-  margin-top: .5em;
-}
-
 img {
   margin-top: -.4em;
-}
-
-span.glyphicon-remove-circle,
-span.glyphicon-cog
-{
-  font-size: 2em;
 }
 
 .main-nav {
@@ -132,10 +70,6 @@ span.glyphicon-cog
   display: none;
 }
 
-.top-space{
-  padding-top: 30px;
-}
-
 /*custom 2*/
 
 .welcome{
@@ -144,19 +78,7 @@ span.glyphicon-cog
   top: 5px;
 }
 
-.btn_size_move{
+.btn-size-move{
   margin-right: 5px;
   margin-top: 7px;
-}
-
-/* change the new app & existing app's button style */
-.btn_size_margin{
-  font-size: 2em;
-  margin-right: -10px;
-  margin-top: -6px;
-}
-
-/* change the label size in creatapp.html  */
-.label_size{
-  font-size: 1.5em;
 }

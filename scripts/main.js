@@ -25,7 +25,7 @@ function showAppDetail(id) {
   applist.find(id)
 
   .then(function (app) {
-    var url = "index.html#"+app.name;
+    var url = "index.html#"+app.id;
   	$(location).attr('href',url);
   	console.log("loc:" + location);
   	$('#name-app').html(app.name);
@@ -84,8 +84,8 @@ if(goBackBtn){
 		$("#detail-app-container").hide();
 	});
 }
-var appname = location.hash.substr(1);
-console.log(appname);
+var appId = location.hash.substr(1);
+console.log(appId);
 
 $(function() {
 	//change app name

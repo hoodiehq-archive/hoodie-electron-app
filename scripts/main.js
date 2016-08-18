@@ -12,12 +12,12 @@ var $startStopAppButton = $('#main-button')
 
 // INIT APP
 $(document).ready(function () {
-  makeAppList()
+  renderAppList()
 })
 
 // EVENT HANDLERS
 $showNewAppFormButton.on('click', function () {
-  $body.attr('data-state', 'new-app')
+  renderNewAppForm()
 })
 
 $newAppForm.on('submit', function (event) {
@@ -33,24 +33,23 @@ $newAppForm.on('submit', function (event) {
       name: appname
     })
       .then(function (app) {
-        makeAppList()
-        showAppDetail(app.id)
+        renderAppDetail(app.id)
       })
   }
 })
 
 $cancelNewAppFormButton.on('click', function () {
-  $body.attr('data-state', 'dashboard')
+  renderAppList()
 })
 
 $appList.on('click', 'li', function (event) {
   var li = event.currentTarget
   var id = $(li).data('id')
-  showAppDetail(id)
+  renderAppDetail(id)
 })
 
 $goBackButton.on('click', function () {
-  $body.attr('data-state', 'dashboard')
+  renderAppList()
 })
 
 $updateAppForm.on('submit', function (event) {
@@ -74,7 +73,11 @@ $startStopAppButton.on('click', function () {
 
 // HELPER METHODS
 
-function showAppDetail (id) {
+function renderNewAppForm () {
+  $body.attr('data-state', 'new-app')
+}
+
+function renderAppDetail (id) {
   applist.find(id)
 
   .then(function (app) {
@@ -85,7 +88,8 @@ function showAppDetail (id) {
   })
 }
 
-function makeAppList () {
+function renderAppList () {
+  $body.attr('data-state', 'dashboard')
   applist.findAll()
     .then(function (apps) {
       apps.forEach(function (app) {

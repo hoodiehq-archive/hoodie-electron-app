@@ -6,10 +6,10 @@ $('#new-app-btn').on('click', function () {
 })
 
 // create an new app, when a user click 'create button'
-var createBtn = document.querySelector('#choose-create')
-createBtn.addEventListener('click', function (event) {
+var $createBtn = $('#choose-create')
+$createBtn.on('click', function (event) {
   // create app array for exisiting apps
-  var appname = document.getElementsByTagName('input')[0].value
+  var appname = $('#empty-text').val()
   var app = {
     name: appname
   }
@@ -40,49 +40,44 @@ $(document).ready(function () {
 })
 
 function makeAppList () {
-  var appLists = document.querySelector('#appLists')
+  var $appLists = $('#appLists')
   applist.findAll()
     .then(function (apps) {
       apps.forEach(function (app) {
-        console.log(app)
-        var $li = document.createElement('li')
-        $li.className = 'list-group-item'
-        $li.setAttribute('id', app.id)
-        $li.innerHTML = `
-        <button type="button" class="btn btn-lg btn-block">${app.name || '-'}
-        <i class="glyphicon glyphicon-play-circle pull-right"></i></button>
+        var html = `
+          <li id="${app.id}" class="list-group-item"
+            <button type="button" class="btn btn-lg btn-block">
+              ${app.name || '-'}
+              <i class="glyphicon glyphicon-play-circle pull-right"></i>
+            </button>
+          </li>
         `
-        appLists.appendChild($li)
+        $appLists.append(html)
       })
     })
 }
 
 $('#appLists').on('click', 'li', function (event) {
   var li = event.currentTarget
-  console.log(li)
   var id = $(li).attr('id')
-  console.log(id)
   $('#apps-container').hide()
   $('#create-app-container').show()
   showAppDetail(id)
 })
 
 // empty the text in the text field, when a user click the 'cancel button'
-var cancelBtn = document.querySelector('#cancel-create')
-if (cancelBtn) {
-  cancelBtn.addEventListener('click', function () {
-    $('#apps-container,#create-app-container').toggle()
-  })
-}
+var $cancelBtn = $('#cancel-create')
+$cancelBtn.on('click', function () {
+  $('#apps-container,#create-app-container').toggle()
+})
 
-var goBackBtn = document.querySelector('#goBackBtn')
-if (goBackBtn) {
-  goBackBtn.addEventListener('click', function () {
-    $('#apps-container').show()
-    $('#create-app-container').hide()
-    $('#detail-app-container').hide()
-  })
-}
+var $goBackBtn = $('#goBackBtn')
+$goBackBtn.on('click', function () {
+  $('#apps-container').show()
+  $('#create-app-container').hide()
+  $('#detail-app-container').hide()
+})
+
 var appId = location.hash.substr(1)
 console.log(appId)
 
@@ -97,13 +92,6 @@ $(function () {
   // toggle start/stop button
   $('#main-button').on('click', function () {
     var $el = $(this)
-
-    // textNode = this.lastChild;
-    console.log($el)
-    console.log($el.text())
-    console.log($el.text().trim() + ' ? ' + 'Start')
-    console.log($el.text() === 'Start')
-    console.log($el.text().trim() === 'Start')
     $el.find('span').toggleClass('glyphicon-play glyphicon-stop')
     $el.toggleClass('main-button')
     // check

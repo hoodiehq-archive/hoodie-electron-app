@@ -12,11 +12,16 @@ var $startStopAppButton = $('#main-button')
 
 // INIT APP
 $(document).ready(function () {
+  route()
   renderAppList()
+})
+$(window).on('hashchange', function () {
+  route()
 })
 
 // EVENT HANDLERS
 $showNewAppFormButton.on('click', function () {
+  setRoute('new')
   renderNewAppForm()
 })
 
@@ -33,22 +38,26 @@ $newAppForm.on('submit', function (event) {
       name: appname
     })
       .then(function (app) {
+        setRoute(app.id)
         renderAppDetail(app.id)
       })
   }
 })
 
 $cancelNewAppFormButton.on('click', function () {
+  setRoute('')
   renderAppList()
 })
 
 $appList.on('click', 'li', function (event) {
   var li = event.currentTarget
   var id = $(li).data('id')
+  setRoute(id)
   renderAppDetail(id)
 })
 
 $goBackButton.on('click', function () {
+  setRoute('')
   renderAppList()
 })
 
@@ -73,6 +82,25 @@ $startStopAppButton.on('click', function () {
 
 // HELPER METHODS
 
+function setRoute (path) {
+  location.hash = '#' + path
+}
+function route () {
+  var path = location.hash.substr(1)
+
+  if (path === '') {
+    console.log('route: dashboard')
+    return
+  }
+
+  if (path === 'new') {
+    console.log('route: new app form')
+    return
+  }
+
+  console.log(`route: app detail (id: ${path})`)
+}
+
 function renderNewAppForm () {
   $body.attr('data-state', 'new-app')
 }
@@ -81,7 +109,6 @@ function renderAppDetail (id) {
   applist.find(id)
 
   .then(function (app) {
-    location.hash = '#' + app.id
     $('#name-app').html(app.name)
     $('#folder').html('~Hoodie/' + app.name)
     $body.attr('data-state', 'app-detail')

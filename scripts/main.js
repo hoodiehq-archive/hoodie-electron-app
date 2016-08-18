@@ -1,6 +1,7 @@
 /* global $, applist, location */
 
 // STORE REFERENCES TO HTML ELEMENTS
+var $body = $(document.body)
 var $showNewAppFormButton = $('#new-app-btn')
 var $newAppForm = $('#form-new-app')
 var $updateAppForm = $('#form-update-app')
@@ -8,9 +9,6 @@ var $cancelNewAppFormButton = $('#cancel-create')
 var $appList = $('#app-list')
 var $goBackButton = $('#go-back-btn')
 var $startStopAppButton = $('#main-button')
-var $appListContainer = $('#apps-container')
-var $createAppFormContainer = $('#create-app-container')
-var $appDetailContainer = $('#detail-app-container')
 
 // INIT APP
 $(document).ready(function () {
@@ -19,9 +17,7 @@ $(document).ready(function () {
 
 // EVENT HANDLERS
 $showNewAppFormButton.on('click', function () {
-  $appListContainer.hide()
-  $createAppFormContainer.show()
-  $appDetailContainer.hide()
+  $body.attr('data-state', 'new-app')
 })
 
 $newAppForm.on('submit', function (event) {
@@ -44,8 +40,7 @@ $newAppForm.on('submit', function (event) {
 })
 
 $cancelNewAppFormButton.on('click', function () {
-  $appListContainer.show()
-  $createAppFormContainer.hide()
+  $body.attr('data-state', 'dashboard')
 })
 
 $appList.on('click', 'li', function (event) {
@@ -55,9 +50,7 @@ $appList.on('click', 'li', function (event) {
 })
 
 $goBackButton.on('click', function () {
-  $appListContainer.show()
-  $createAppFormContainer.hide()
-  $appDetailContainer.hide()
+  $body.attr('data-state', 'dashboard')
 })
 
 $updateAppForm.on('submit', function (event) {
@@ -93,9 +86,7 @@ function showAppDetail (id) {
     location.hash = '#' + app.id
     $('#name-app').html(app.name)
     $('#folder').html('~Hoodie/' + app.name)
-    $appDetailContainer.show()
-    $appListContainer.hide()
-    $createAppFormContainer.hide()
+    $body.attr('data-state', 'app-detail')
   })
 }
 

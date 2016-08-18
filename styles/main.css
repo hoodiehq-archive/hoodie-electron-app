@@ -4,6 +4,16 @@ body {
   padding-bottom: 20px;
 }
 
+/* show / hide sections */
+section {
+  display: none;
+}
+[data-state="dashboard"] #apps-container,
+[data-state="new-app"] #create-app-container,
+[data-state="app-detail"] #detail-app-container {
+  display: block;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .footer {
   padding-left: 15px;
@@ -38,15 +48,6 @@ img {
 
 .main-nav {
   margin: 20px -15px;
-}
-
-#name-app {
-  position: relative;
-  top: 5px;
-}
-
-#main-button {
-  margin-bottom: 30px;
 }
 
 .main-links {

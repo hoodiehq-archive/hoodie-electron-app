@@ -108,6 +108,7 @@ function renderAppDetail (id) {
 function renderAppList () {
   $body.attr('data-state', 'dashboard')
 
+  $appList.empty()
   applist.findAll()
     .then(function (apps) {
       apps.forEach(function (app) {

@@ -8,6 +8,9 @@ var $appList = $('#appLists')
 var $goBackButton = $('#goBackBtn')
 var $submitAppChangeFormButton = $('#js-change-appname')
 var $startStopAppButton = $('#main-button')
+var $appListContainer = $('#apps-container')
+var $createAppFormContainer = $('#create-app-container')
+var $appDetailContainer = $('#detail-app-container')
 
 // INIT APP
 $(document).ready(function () {
@@ -16,9 +19,9 @@ $(document).ready(function () {
 
 // EVENT HANDLERS
 $showNewAppFormButton.on('click', function () {
-  $('#apps-container').hide()
-  $('#create-app-container').show()
-  $('#detail-app-container').hide()
+  $appListContainer.hide()
+  $createAppFormContainer.show()
+  $appDetailContainer.hide()
 })
 
 $newAppForm.on('submit', function (event) {
@@ -41,7 +44,8 @@ $newAppForm.on('submit', function (event) {
 })
 
 $cancelNewAppFormButton.on('click', function () {
-  $('#apps-container,#create-app-container').toggle()
+  $appListContainer.show()
+  $createAppFormContainer.hide()
 })
 
 $appList.on('click', 'li', function (event) {
@@ -51,9 +55,9 @@ $appList.on('click', 'li', function (event) {
 })
 
 $goBackButton.on('click', function () {
-  $('#apps-container').show()
-  $('#create-app-container').hide()
-  $('#detail-app-container').hide()
+  $appListContainer.show()
+  $createAppFormContainer.hide()
+  $appDetailContainer.hide()
 })
 
 $submitAppChangeFormButton.on('click', function () {

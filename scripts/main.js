@@ -91,8 +91,9 @@ function showAppDetail (id) {
     location.hash = '#' + app.id
     $('#name-app').html(app.name)
     $('#folder').html('~Hoodie/' + app.name)
-    $('#detail-app-page').show()
-    $('#apps-container, #create-app-container').hide()
+    $appDetailContainer.show()
+    $appListContainer.hide()
+    $createAppFormContainer.hide()
   })
 }
 

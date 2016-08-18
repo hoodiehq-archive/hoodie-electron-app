@@ -23,6 +23,16 @@ section {
   border-top: 1px solid #e5e5e5;
 }
 
+#app-list {
+  margin-top: 20px;
+}
+#app-list li {
+  cursor: pointer;
+}
+#app-list li:hover {
+  background: #eee;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {

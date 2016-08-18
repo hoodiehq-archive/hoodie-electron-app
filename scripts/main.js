@@ -63,14 +63,13 @@ $updateAppForm.on('submit', function (event) {
 
 // toggle start/stop button
 $startStopAppButton.on('click', function () {
-  var $el = $(this)
-  $el.find('i').toggleClass('glyphicon-play glyphicon-stop')
-  $el.toggleClass('main-button')
+  $startStopAppButton.find('i').toggleClass('glyphicon-play glyphicon-stop')
+  $startStopAppButton.toggleClass('main-button')
   // check
   $('#link-details').toggle()
   // change
-  var label = $el.find('span').text().trim() === 'Start' ? 'Stop' : 'Start'
-  $el.find('span').text(label)
+  var label = $startStopAppButton.find('span').text().trim() === 'Start' ? 'Stop' : 'Start'
+  $startStopAppButton.find('span').text(label)
 })
 
 // HELPER METHODS

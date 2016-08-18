@@ -125,10 +125,10 @@ span.glyphicon-cog
   height: 100%;
   padding-right: 30px;
 }
-#container2{
+#create-app-container{
   display: none;
 }
-#detail_app_page{
+#detail-app-page{
   display: none;
 }
 

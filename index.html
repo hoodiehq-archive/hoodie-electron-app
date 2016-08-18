@@ -21,16 +21,13 @@
       </div>
       <div class="col-sm-4">
       </div>
-    </div>
+    </div><!-- ./main-nav -->
 
-    <!-- end main nav -->
-
-    <!-- well and menu list -->
-    <section class="container-fluid" id="apps-container">
+    <section id="apps-container">
       <div class="well">
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <button id="new-app-btn" type="button" class="btn btn-lg btn-block">
+            <button id="new-app-btn" type="button" class="btn btn-lg btn-block btn-primary">
               New App
               <i class="glyphicon glyphicon-plus-sign pull-right"></i>
             </button>
@@ -41,12 +38,9 @@
           </div>
         </div>
       </div>
-    </section>
-    <!--end well and menu list -->
+    </section><!-- /apps-container -->
 
-    <!-- well, create app -->
-
-    <section class="content-right" id="create-app-container">
+    <section id="create-app-container">
       <div class="well">
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -64,11 +58,10 @@
             </form>
           </div>
         </div>
-        <!--end well, create app -->
       </div>
-    </section>
-    <!-- main nav: app name, back and edit buttons -->
-    <section class="container-fluid" id="detail-app-container">
+    </section><!-- /create-app-container -->
+
+    <section id="detail-app-container">
       <div class="row main-nav">
         <div class="col-sm-4">
           <button type="button" id="go-back-btn" class="btn btn-default pull-left">
@@ -83,22 +76,22 @@
             <span class="glyphicon glyphicon-pencil"></span>
           </button>
         </div>
-      </div>
-      <!-- end main nav -->
-      <!-- main content: stop/start button and links -->
+      </div><!-- /.main-nav -->
+
       <div class="well">
         <!-- stop/start button -->
         <button type="button" class="btn btn-default center-block main-button" id='main-button'>
           <i class="glyphicon glyphicon-play" aria-hidden="true"></i> <span>Start</span>
         </button>
+
         <!-- main links -->
         <ul class="list-group main-links" id="link-details">
           <li class="list-group-item"><span class="glyphicon glyphicon-folder-open"></span> <a href="#"><span id="folder"></span></a></li>
           <li class="list-group-item"><span class="glyphicon glyphicon-globe"></span><a href="#">http://localhost:6001</a></li>
           <li class="list-group-item"><span class="glyphicon glyphicon-user"></span><a href="#">http://localhost:6001/hoodie/admin</a></li>
         </ul>
-      </div>
-      <!-- end main content -->
+      </div><!-- /.main-content -->
+
       <!-- modal: change app name -->
       <div class="modal fade" id="rename-modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-sm" role="document">
@@ -121,9 +114,9 @@
             </div>
           </form>
         </div>
-      </div>
-    </section>
-    <!-- end modal -->
+      </div><!-- /.modal -->
+    </section><!-- /detail-app-container -->
+
     <div class="container-fluid">
       <div class="footer">
         <p class="text-center">Hoodie with &nbsp; <span class="glyphicon glyphicon-heart"></span></p>

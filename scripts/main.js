@@ -13,7 +13,6 @@ var $startStopAppButton = $('#main-button')
 // INIT APP
 $(document).ready(function () {
   route()
-  renderAppList()
 })
 $(window).on('hashchange', function () {
   route()
@@ -22,7 +21,6 @@ $(window).on('hashchange', function () {
 // EVENT HANDLERS
 $showNewAppFormButton.on('click', function () {
   setRoute('new')
-  renderNewAppForm()
 })
 
 $newAppForm.on('submit', function (event) {
@@ -39,26 +37,22 @@ $newAppForm.on('submit', function (event) {
     })
       .then(function (app) {
         setRoute(app.id)
-        renderAppDetail(app.id)
       })
   }
 })
 
 $cancelNewAppFormButton.on('click', function () {
   setRoute('')
-  renderAppList()
 })
 
 $appList.on('click', 'li', function (event) {
   var li = event.currentTarget
   var id = $(li).data('id')
   setRoute(id)
-  renderAppDetail(id)
 })
 
 $goBackButton.on('click', function () {
   setRoute('')
-  renderAppList()
 })
 
 $updateAppForm.on('submit', function (event) {
@@ -89,16 +83,19 @@ function route () {
   var path = location.hash.substr(1)
 
   if (path === '') {
+    renderAppList()
     console.log('route: dashboard')
     return
   }
 
   if (path === 'new') {
     console.log('route: new app form')
+    renderNewAppForm()
     return
   }
 
   console.log(`route: app detail (id: ${path})`)
+  renderAppDetail(path)
 }
 
 function renderNewAppForm () {

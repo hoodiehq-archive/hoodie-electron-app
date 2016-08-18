@@ -47,8 +47,6 @@ $cancelNewAppFormButton.on('click', function () {
 $appList.on('click', 'li', function (event) {
   var li = event.currentTarget
   var id = $(li).attr('id')
-  $('#apps-container').hide()
-  $('#create-app-container').show()
   showAppDetail(id)
 })
 
@@ -89,7 +87,8 @@ function showAppDetail (id) {
     location.hash = '#' + app.id
     $('#name-app').html(app.name)
     $('#folder').html('~Hoodie/' + app.name)
-    $('#create-app-container,#detail-app-container').toggle()
+    $('#detail-app-page').show()
+    $('#apps-container, #create-app-container').hide()
   })
 }
 

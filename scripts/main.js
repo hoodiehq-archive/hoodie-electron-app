@@ -11,12 +11,8 @@ var $goBackButton = $('#go-back-btn')
 var $startStopAppButton = $('#main-button')
 
 // INIT APP
-$(document).ready(function () {
-  route()
-})
-$(window).on('hashchange', function () {
-  route()
-})
+$(document).ready(handleRoute)
+$(window).on('hashchange', handleRoute)
 
 // EVENT HANDLERS
 $showNewAppFormButton.on('click', function () {
@@ -27,14 +23,11 @@ $newAppForm.on('submit', function (event) {
   event.preventDefault()
 
   // create app array for exisiting apps
-  var appname = $('#empty-text').val()
   var app = {
-    name: appname
+    name: $('#empty-text').val()
   }
   if (app.name) {
-    applist.add({
-      name: appname
-    })
+    applist.add(app)
       .then(function (app) {
         setRoute(app.id)
       })
@@ -79,12 +72,12 @@ $startStopAppButton.on('click', function () {
 function setRoute (path) {
   location.hash = '#' + path
 }
-function route () {
+function handleRoute () {
   var path = location.hash.substr(1)
 
   if (path === '') {
-    renderAppList()
     console.log('route: dashboard')
+    renderAppList()
     return
   }
 
@@ -114,6 +107,7 @@ function renderAppDetail (id) {
 
 function renderAppList () {
   $body.attr('data-state', 'dashboard')
+
   applist.findAll()
     .then(function (apps) {
       apps.forEach(function (app) {

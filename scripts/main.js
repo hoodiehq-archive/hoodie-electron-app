@@ -64,16 +64,12 @@ $updateAppForm.on('submit', function (event) {
 // toggle start/stop button
 $startStopAppButton.on('click', function () {
   var $el = $(this)
-  $el.find('span').toggleClass('glyphicon-play glyphicon-stop')
+  $el.find('i').toggleClass('glyphicon-play glyphicon-stop')
   $el.toggleClass('main-button')
   // check
-  if ($el.text().trim() === 'Start') {
-    $('#link-details').show()
-  } else if ($el.text().trim() === 'Stop') {
-    $('#link-details').hide()
-  }
+  $('#link-details').toggle()
   // change
-  var label = $el.text().trim() === 'Start' ? 'Stop' : 'Start'
+  var label = $el.find('span').text().trim() === 'Start' ? 'Stop' : 'Start'
   $el.find('span').text(label)
 })
 

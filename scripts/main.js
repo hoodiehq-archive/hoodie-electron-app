@@ -66,8 +66,7 @@ $("#appLists").on("click","li",function(event){
 var cancelBtn = document.querySelector("#cancel-create");
 if(cancelBtn){
 	cancelBtn.addEventListener("click",function(){
-		//$("#apps-container,#create-app-container").toggle();
-		$("#apps-container").show();
+		$("#apps-container,#create-app-container").toggle();
 	});
 }
 

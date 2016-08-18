@@ -28,9 +28,7 @@ function showAppDetail (id) {
   applist.find(id)
 
   .then(function (app) {
-    var url = 'index.html#' + app.id
-    $(location).attr('href', url)
-    console.log('loc:' + location)
+    location.hash = '#' + app.id
     $('#name-app').html(app.name)
     $('#folder').html('~Hoodie/' + app.name)
     $('#create-app-container,#detail-app-container').toggle()

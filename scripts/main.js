@@ -45,7 +45,7 @@ $cancelNewAppFormButton.on('click', function () {
 
 $appList.on('click', 'li', function (event) {
   var li = event.currentTarget
-  var id = $(li).attr('id')
+  var id = $(li).data('id')
   showAppDetail(id)
 })
 
@@ -90,7 +90,7 @@ function makeAppList () {
     .then(function (apps) {
       apps.forEach(function (app) {
         var html = `
-          <li id="${app.id}" class="list-group-item"
+          <li data-id="${app.id}" class="list-group-item"
             <button type="button" class="btn btn-lg btn-block">
               ${app.name || '-'}
               <i class="glyphicon glyphicon-play-circle pull-right"></i>

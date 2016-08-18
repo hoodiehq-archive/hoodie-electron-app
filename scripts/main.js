@@ -1,32 +1,37 @@
 $("#new-app-btn").on("click", function(){
-$("#apps-container").hide();
-$("#create-app-container").show();
-$("#detail-app-container").hide();
-	//create an new app, when a user click 'create button'
-var createBtn = document.querySelector("#choose-create");
-if(createBtn){
-  createBtn.addEventListener("click",function(event){
-			//create app array for exisiting apps
-	var appname = document.getElementsByTagName("input")[0].value;
-	var app = { name: appname};
-	if(app.name){
-		applist.add ({
-		  name : appname
-		})
-	makeAppList();
-	showAppDetail(app.id);
-					    }
-		      });
-	    }
+  $("#apps-container").hide();
+  $("#create-app-container").show();
+  $("#detail-app-container").hide();
+  	//create an new app, when a user click 'create button'
+  var createBtn = document.querySelector("#choose-create");
+  if(createBtn){
+    createBtn.addEventListener("click",function(event){
+    	//create app array for exisiting apps
+    	var appname = document.getElementsByTagName("input")[0].value;
+    	var app = { name: appname};
+    	if(app.name){
+    		applist.add ({
+    		  name : appname
+    		})
+        .then(function (app) {
+          makeAppList();
+        	showAppDetail(app.id);
+        })
+      }
+  });
+}
 });
 function showAppDetail(id) {
-  var app = applist.find(id);
-  var url = "index.html#"+app.name;
-	$(location).attr('href',url);
-	console.log("loc:" + location);
-	$('#name-app').html(app.name);
-	$('#folder').html('~Hoodie/'+app.name);
-	$("#create-app-container,#detail-app-container").	toggle();
+  applist.find(id)
+
+  .then(function (app) {
+    var url = "index.html#"+app.name;
+  	$(location).attr('href',url);
+  	console.log("loc:" + location);
+  	$('#name-app').html(app.name);
+  	$('#folder').html('~Hoodie/'+app.name);
+  	$("#create-app-container,#detail-app-container").	toggle();
+  })
 }
 // show apps list in html once the document is ready
 $(document).ready(function(){

@@ -1,121 +1,126 @@
-$("#new-app-btn").on("click", function(){
-  $("#apps-container").hide();
-  $("#create-app-container").show();
-  $("#detail-app-container").hide();
-  	//create an new app, when a user click 'create button'
-  var createBtn = document.querySelector("#choose-create");
-  if(createBtn){
-    createBtn.addEventListener("click",function(event){
-    	//create app array for exisiting apps
-    	var appname = document.getElementsByTagName("input")[0].value;
-    	var app = { name: appname};
-    	if(app.name){
-    		applist.add ({
-    		  name : appname
-    		})
-        .then(function (app) {
-          makeAppList();
-        	showAppDetail(app.id);
-        })
-      }
-  });
+/* global $, applist, location */
+
+// STORE REFERENCES TO HTML ELEMENTS
+var $body = $(document.body)
+var $showNewAppFormButton = $('#new-app-btn')
+var $newAppForm = $('#form-new-app')
+var $updateAppForm = $('#form-update-app')
+var $cancelNewAppFormButton = $('#cancel-create')
+var $appList = $('#app-list')
+var $goBackButton = $('#go-back-btn')
+var $startStopAppButton = $('#main-button')
+
+// INIT APP
+$(document).ready(handleRoute)
+$(window).on('hashchange', handleRoute)
+
+// EVENT HANDLERS
+$showNewAppFormButton.on('click', function () {
+  setRoute('new')
+})
+
+$newAppForm.on('submit', function (event) {
+  event.preventDefault()
+
+  // create app array for exisiting apps
+  var app = {
+    name: $('#empty-text').val()
+  }
+  if (app.name) {
+    applist.add(app)
+      .then(function (app) {
+        setRoute(app.id)
+      })
+  }
+})
+
+$cancelNewAppFormButton.on('click', function () {
+  setRoute('')
+})
+
+$appList.on('click', 'li', function (event) {
+  var li = event.currentTarget
+  var id = $(li).data('id')
+  setRoute(id)
+})
+
+$goBackButton.on('click', function () {
+  setRoute('')
+})
+
+$updateAppForm.on('submit', function (event) {
+  event.preventDefault()
+  var changed = $('#rename-app').val()
+  $('#name-app').text(changed)
+  $('#folder').text('~Hoodie/' + changed)
+  $updateAppForm.closest('.modal').modal('hide')
+})
+
+// toggle start/stop button
+$startStopAppButton.on('click', function () {
+  $startStopAppButton.find('i').toggleClass('glyphicon-play glyphicon-stop')
+  $startStopAppButton.toggleClass('main-button')
+  // check
+  $('#link-details').toggle()
+  // change
+  var label = $startStopAppButton.find('span').text().trim() === 'Start' ? 'Stop' : 'Start'
+  $startStopAppButton.find('span').text(label)
+})
+
+// HELPER METHODS
+
+function setRoute (path) {
+  location.hash = '#' + path
 }
-});
-function showAppDetail(id) {
+function handleRoute () {
+  var path = location.hash.substr(1)
+
+  if (path === '') {
+    console.log('route: dashboard')
+    renderAppList()
+    return
+  }
+
+  if (path === 'new') {
+    console.log('route: new app form')
+    renderNewAppForm()
+    return
+  }
+
+  console.log(`route: app detail (id: ${path})`)
+  renderAppDetail(path)
+}
+
+function renderNewAppForm () {
+  $body.attr('data-state', 'new-app')
+}
+
+function renderAppDetail (id) {
   applist.find(id)
 
   .then(function (app) {
-    var url = "index.html#"+app.id;
-  	$(location).attr('href',url);
-  	console.log("loc:" + location);
-  	$('#name-app').html(app.name);
-  	$('#folder').html('~Hoodie/'+app.name);
-  	$("#create-app-container,#detail-app-container").	toggle();
+    $('#name-app').html(app.name)
+    $('#folder').html('~Hoodie/' + app.name)
+    $body.attr('data-state', 'app-detail')
   })
 }
-// show apps list in html once the document is ready
-$(document).ready(function(){
-	makeAppList();
-});
 
-function makeAppList() {
-	var appLists = document.querySelector("#appLists");
-	applist.findAll()
-	.then(function(apps){
-		apps.forEach(function(app){
-			console.log(app);
-			var $li = document.createElement('li');
-			$li.className = 'list-group-item';
-			$li.setAttribute('id', app.id);
-			//$li.textContent = app.name || '-';
-			$li.innerHTML = `
-			<button type ="button" class="btn btn-lg btn-block">${app.name || '-'}
-			<i class="glyphicon glyphicon-play-circle pull-right"></i></button>
-			`;
-			appLists.appendChild($li);
-		});
-	})
+function renderAppList () {
+  $body.attr('data-state', 'dashboard')
 
+  $appList.empty()
+  applist.findAll()
+    .then(function (apps) {
+      apps.forEach(function (app) {
+        var html = `
+          <li data-id="${app.id}" class="list-group-item"
+            <button type="button" class="btn btn-lg btn-block">
+              ${app.name || '-'}
+              <i class="glyphicon glyphicon-play-circle pull-right"></i>
+            </button>
+          </li>
+        `
+        $appList.append(html)
+      })
+    })
 }
-
-$("#appLists").on("click","li",function(event){
-	var li = event.currentTarget;
-	console.log(li);
-	var id = $(li).attr('id');
-	console.log(id);
-	$("#apps-container").hide();
-	$("#create-app-container").show();
-	showAppDetail(id);
-});
-//empty the text in the text field, when a user click the 'cancel button'
-var cancelBtn = document.querySelector("#cancel-create");
-if(cancelBtn){
-	cancelBtn.addEventListener("click",function(){
-		$("#apps-container,#create-app-container").toggle();
-	});
-}
-
-var goBackBtn = document.querySelector("#goBackBtn");
-if(goBackBtn){
-	goBackBtn.addEventListener("click",function(){
-		//$("#apps-container,#create-app-container").toggle();
-		$("#apps-container").show();
-		$("#create-app-container").hide();
-		$("#detail-app-container").hide();
-	});
-}
-var appId = location.hash.substr(1);
-console.log(appId);
-
-$(function() {
-	//change app name
-	$('#js-change-appname').on('click', function () {
-		var changed = $('#rename-app').val();
-		$('#name-app').text( changed );
-		$('#folder').text('~Hoodie/'+changed);
-	});
-
-	//toggle start/stop button
-	$('#main-button').on('click', function () {
-		var $el = $(this);
-
-		//textNode = this.lastChild;
-		console.log($el);
-		console.log($el.text());
-		console.log($el.text().trim() + " ? " + 'Start');
-		console.log($el.text() === 'Start');
-		console.log($el.text().trim() === 'Start');
-		$el.find('span').toggleClass('glyphicon-play glyphicon-stop');
-		$el.toggleClass('main-button');
-		//check
-		if( $el.text().trim() === 'Start'){
-			$("#link-details").show();
-		}else if( $el.text().trim() === 'Stop'){
-			$("#link-details").hide();
-		}
-		// change
-		var label = $el.text().trim() === 'Start' ? 'Stop' : 'Start';
-		$el.find('span').text(label);
-	});
-
-});

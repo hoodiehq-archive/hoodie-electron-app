@@ -8,7 +8,7 @@ $("#new-app-btn").on("click", function(){
 	//create an new app, when a user click 'create button'
 	var createBtn = document.querySelector("#choose-create");
 	if(createBtn){
-		  createBtn.addEventListener("click",function(){
+		createBtn.addEventListener("click",function(){
 			//create app array for exisiting apps
 			var appname = document.getElementsByTagName("input")[0].value;
 			var id = Math.random().toString(36).substr(2, 7);
@@ -19,9 +19,6 @@ $("#new-app-btn").on("click", function(){
 			//app.dataset.id = id;
 			console.log(id);
 			if(app.name){
-				// console.log('appname_localstorage: '+ appname);
-				// localStorage.setItem("app-name", appname);
-				// call a function(appLists)?
 				apps.push(app);
 				makeAppList();
 				console.log(app);
@@ -46,23 +43,12 @@ function showAppDetail(id) {
 }
 
 function appById(id) {
-	// v1
 	var findApp = function(app) {
 		return app.id === id;
 	};
 	return apps.find(findApp);
-	// v2
-	// return apps.find(function (app) {
-	// 	return app.id === id;
-	// });
-	// v3
-	// return apps.find((app) => app.id === id);
-	// v4
-	// for (var i = 0; i < apps.length; i++) {
-	// 	if (apps[i].id === id)
-	// 		return apps[i];
-	// 	}
 }
+
 // show apps list in html once the document is ready
 $(document).ready(function(){
 	makeAppList();
@@ -97,9 +83,6 @@ $("#appLists").on("click","li",function(event){
 	showAppDetail(id);
 });
 
-//var appClicked = document.querySelector("${app.name}");
-//$("#detail-app-container").show();
-
 //empty the text in the text field, when a user click the 'cancel button'
 var cancelBtn = document.querySelector("#cancel-create");
 if(cancelBtn){
@@ -118,22 +101,6 @@ if(goBackBtn){
 	});
 }
 
-// for (i=0;i<apps.length;i++)
-// {
-// 	var container = $('#convoy_list');
-// 	var result = '<li role="presentation" class="divider"><li role="presentation">' +
-// 							 '<button role="menuitem" tabindex="-1" type="button" class="btn btn-secondary btn-sm btn-block">' +
-// 							 '<i class="glyphicon glyphicon-folder-open"></i> ' +
-// 							 apps[i].name + '</button></li></li>';
-//  container.append(result);
-//  //console.log($('<li>', container));
-//  console.log('apps JSON.stringify:'+ apps[i].name);
-//  $('#name-app').html(appname);
-// }
-
-//detail_app_page.html
-//var lengthApp = apps.length - 1;
-//var getAppName = apps[lengthApp];
 var appname = location.hash.substr(1);
 console.log(appname);
 
@@ -149,7 +116,6 @@ $(function() {
 	$('#main-button').on('click', function () {
 		var $el = $(this);
 
-		//textNode = this.lastChild;
 		console.log($el);
 		console.log($el.text());
 		console.log($el.text().trim() + " ? " + 'Start');

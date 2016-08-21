@@ -51,9 +51,19 @@ $goBackButton.on('click', function () {
 $updateAppForm.on('submit', function (event) {
   event.preventDefault()
   var changed = $('#rename-app').val()
-  $('#name-app').text(changed)
-  $('#folder').text('~Hoodie/' + changed)
-  $updateAppForm.closest('.modal').modal('hide')
+  var app = {
+    id: $('#name-app').data('id'),
+    name: changed
+  }
+  console.log("app:"+ JSON.stringify(app))
+  if (changed) {
+    applist.update(app)
+      .then(function (app) {
+        $('#name-app').text(app.name)
+        $('#folder').text('~Hoodie/' + app.name)
+        $updateAppForm.closest('.modal').modal('hide')
+      })
+    }
 })
 
 // toggle start/stop button
@@ -100,6 +110,10 @@ function renderAppDetail (id) {
 
   .then(function (app) {
     $('#name-app').html(app.name)
+    // $('#name-app').data('id', ""+app.id)
+    $('#name-app').attr('data-id', ""+app.id)
+    // $('#name-app').prop('data-id', ""+app.id)
+    // console.log(app.id)
     $('#folder').html('~Hoodie/' + app.name)
     $body.attr('data-state', 'app-detail')
   })

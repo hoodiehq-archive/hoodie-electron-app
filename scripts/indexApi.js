@@ -25,15 +25,15 @@ applist.find = function (id) {
       return apps.find(findApp)
     })
 }
-applist.add = function (app) {
-  app.id = Math.random().toString(36).substr(2, 7)
-  return applist.findAll()
-    .then(function (apps) {
-      apps.push(app)
-      localStorage.setItem('apps', JSON.stringify(apps))
-      return app
-    })
-}
+// applist.add = function (app) {
+//   app.id = Math.random().toString(36).substr(2, 7)
+//   return applist.findAll()
+//     .then(function (apps) {
+//       apps.push(app)
+//       localStorage.setItem('apps', JSON.stringify(apps))
+//       return app
+//     })
+// }
 applist.update = function(app){
   return applist.findAll()
     .then(function (apps) {
@@ -47,4 +47,13 @@ applist.update = function(app){
       localStorage.setItem('apps', JSON.stringify(newApps))
       return app
     })
+}
+applist.remove = function(id){
+  return applist.findAll()
+.then (function (apps){
+  apps =apps.filter(function(app){
+    return app.id!==id
+  })
+  localStorage.setItem('apps', JSON.stringify(apps))
+})
 }

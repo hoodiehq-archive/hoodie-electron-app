@@ -28,9 +28,9 @@ $newAppForm.on('submit', function (event) {
   }
   if (app.name) {
     applist.add(app)
-      .then(function (app) {
-        setRoute(app.id)
-      })
+    .then(function (app) {
+      setRoute(app.id)
+    })
   }
 })
 
@@ -58,23 +58,28 @@ $updateAppForm.on('submit', function (event) {
   console.log("app:"+ JSON.stringify(app))
   if (changed) {
     applist.update(app)
-      .then(function (app) {
-        $('#name-app').text(app.name)
-        $('#folder').text('~Hoodie/' + app.name)
-        $updateAppForm.closest('.modal').modal('hide')
-      })
-    }
+    .then(function (app) {
+      $('#name-app').text(app.name)
+      $('#folder').text('~Hoodie/' + app.name)
+      $updateAppForm.closest('.modal').modal('hide')
+    })
+  }
 })
 
 // toggle start/stop button
 $startStopAppButton.on('click', function () {
-  $startStopAppButton.find('i').toggleClass('glyphicon-play glyphicon-stop')
-  $startStopAppButton.toggleClass('main-button')
-  // check
-  $('#link-details').toggle()
-  // change
-  var label = $startStopAppButton.find('span').text().trim() === 'Start' ? 'Stop' : 'Start'
-  $startStopAppButton.find('span').text(label)
+  var app = {
+    id: $('#name-app').data('id')
+  }
+  applist.start(app)
+  .then(function(app){
+    $startStopAppButton.find('i').toggleClass('glyphicon-play glyphicon-stop')
+    $startStopAppButton.toggleClass('main-button')
+    // change
+    var label = $startStopAppButton.find('span').text().trim() === 'Start' ? 'Stop' : 'Start'
+    $startStopAppButton.find('span').text(label)
+    //renderAppDetail(app.id)
+  })
 })
 
 // HELPER METHODS
@@ -110,8 +115,8 @@ function renderAppDetail (id) {
 
   .then(function (app) {
     $('#name-app').html(app.name)
-    // $('#name-app').data('id', ""+app.id)
-    $('#name-app').attr('data-id', ""+app.id)
+    //$('#name-app').data('id', ""+app.id)
+    $('#name-app').attr('data-id', app.id)
     // $('#name-app').prop('data-id', ""+app.id)
     // console.log(app.id)
     $('#folder').html('~Hoodie/' + app.name)
@@ -124,17 +129,17 @@ function renderAppList () {
 
   $appList.empty()
   applist.findAll()
-    .then(function (apps) {
-      apps.forEach(function (app) {
-        var html = `
-          <li data-id="${app.id}" class="list-group-item"
-            <button type="button" class="btn btn-lg btn-block">
-              ${app.name || '-'}
-              <i class="glyphicon glyphicon-play-circle pull-right"></i>
-            </button>
-          </li>
-        `
-        $appList.append(html)
-      })
+  .then(function (apps) {
+    apps.forEach(function (app) {
+      var html = `
+      <li data-id="${app.id}" class="list-group-item"
+      <button type="button" class="btn btn-lg btn-block">
+      ${app.name || '-'}
+      <i class="glyphicon glyphicon-play-circle pull-right"></i>
+      </button>
+      </li>
+      `
+      $appList.append(html)
     })
+  })
 }

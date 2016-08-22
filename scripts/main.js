@@ -9,6 +9,7 @@ var $cancelNewAppFormButton = $('#cancel-create')
 var $appList = $('#app-list')
 var $goBackButton = $('#go-back-btn')
 var $startStopAppButton = $('#main-button')
+var $deletebtn = $('#deletebtn')
 
 // INIT APP
 $(document).ready(handleRoute)
@@ -65,6 +66,17 @@ $updateAppForm.on('submit', function (event) {
       })
     }
 })
+$deletebtn.on('click',function(event){
+	event.preventDefault()
+	var id = $('#deletebtn').data('id')
+	console.log(id)
+	applist.find(id)
+	.then (function(app){
+		applist.remove(id)
+		//renderAppList ()
+		setRoute('')
+	})
+})
 
 // toggle start/stop button
 $startStopAppButton.on('click', function () {
@@ -112,6 +124,7 @@ function renderAppDetail (id) {
     $('#name-app').html(app.name)
     // $('#name-app').data('id', ""+app.id)
     $('#name-app').attr('data-id', ""+app.id)
+		$('#deletebtn').attr('data-id', ""+app.id)
     // $('#name-app').prop('data-id', ""+app.id)
     // console.log(app.id)
     $('#folder').html('~Hoodie/' + app.name)

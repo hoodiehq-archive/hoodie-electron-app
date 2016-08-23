@@ -8,7 +8,8 @@ var $updateAppForm = $('#form-update-app')
 var $cancelNewAppFormButton = $('#cancel-create')
 var $appList = $('#app-list')
 var $goBackButton = $('#go-back-btn')
-var $startStopAppButton = $('#main-button')
+var $startAppButton = $('#start-button')
+var $stopAppButton = $('#stop-button')
 
 // INIT APP
 $(document).ready(handleRoute)
@@ -66,19 +67,25 @@ $updateAppForm.on('submit', function (event) {
   }
 })
 
-// toggle start/stop button
-$startStopAppButton.on('click', function () {
+// start/stop button
+$startAppButton.on('click', function () {
   var app = {
     id: $('#name-app').data('id')
   }
   applist.start(app)
   .then(function(app){
-    $startStopAppButton.find('i').toggleClass('glyphicon-play glyphicon-stop')
-    $startStopAppButton.toggleClass('main-button')
-    // change
-    var label = $startStopAppButton.find('span').text().trim() === 'Start' ? 'Stop' : 'Start'
-    $startStopAppButton.find('span').text(label)
-    //renderAppDetail(app.id)
+    $('#detail-app-container').attr('data-state','started')
+  })
+})
+
+// start/stop button
+$stopAppButton.on('click', function () {
+  var app = {
+    id: $('#name-app').data('id')
+  }
+  applist.stop(app)
+  .then(function(app){
+    $('#detail-app-container').attr('data-state','stopped')
   })
 })
 
@@ -87,6 +94,7 @@ $startStopAppButton.on('click', function () {
 function setRoute (path) {
   location.hash = '#' + path
 }
+
 function handleRoute () {
   var path = location.hash.substr(1)
 
@@ -115,10 +123,8 @@ function renderAppDetail (id) {
 
   .then(function (app) {
     $('#name-app').html(app.name)
-    //$('#name-app').data('id', ""+app.id)
     $('#name-app').attr('data-id', app.id)
-    // $('#name-app').prop('data-id', ""+app.id)
-    // console.log(app.id)
+    $('#detail-app-container').attr('data-state',app.state)
     $('#folder').html('~Hoodie/' + app.name)
     $body.attr('data-state', 'app-detail')
   })

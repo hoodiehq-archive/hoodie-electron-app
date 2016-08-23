@@ -9,6 +9,7 @@ applist.findAll = function () {
 
 applist.add = function (app) {
   app.id = Math.random().toString(36).substr(2, 7)
+  app.state = 'stopped'
   return applist.findAll()
   .then(function (apps) {
     apps.push(app)
@@ -27,14 +28,21 @@ applist.find = function (id) {
 }
 
 applist.update = function(app){
+  //console.log(app.state);
+  //app.state = (app.state === 'started') ? 'stopped' : 'started'
+  //console.log(app.state);
   return applist.findAll()
   .then(function (apps) {
-    var newApps =apps.map(function (currentApp) {
+    var newApps = apps.map(function (currentApp) {
       if (currentApp.id === app.id) {
-        return {name:app.name, id:app.id}
-      } else {
-        return currentApp
+        if(app.name){
+          currentApp.name = app.name
+        }
+        if(app.state){
+          currentApp.state = app.state
+        }
       }
+      return currentApp
     })
     localStorage.setItem('apps', JSON.stringify(newApps))
     return app
@@ -42,9 +50,11 @@ applist.update = function(app){
 }
 
 applist.start = function(app){
-  return applist.find(app.id)
-  .then(function (currentApp){
-      $('#link-details').toggle()
-  })
-  return app
+  app.state = 'started'
+  return applist.update(app)
+}
+
+applist.stop = function(app){
+  app.state = 'stopped'
+  return applist.update(app)
 }

@@ -79,13 +79,16 @@
       </div><!-- /.main-nav -->
 
       <div class="well">
-        <!-- stop/start button -->
-        <button type="button" class="btn btn-default center-block main-button" id='main-button'>
-          <i class="glyphicon glyphicon-play" aria-hidden="true"></i> <span>Start</span>
+        <!-- start button -->
+        <button type="button" class="btn btn-default center-block main-button" id='start-button' data-state="">
+          <i class="glyphicon glyphicon-play" aria-hidden="true"></i> <span id="button-label">Start</span>
         </button>
-
+        <!-- stop button -->
+        <button type="button" class="btn btn-default center-block main-button" id='stop-button' data-state="">
+          <i class="glyphicon glyphicon-stop" aria-hidden="true"></i> <span id="button-label">Stop</span>
+        </button>
         <!-- main links -->
-        <ul class="list-group main-links" id="link-details" style="display: none;">
+        <ul class="list-group main-links" id="link-details">
           <li class="list-group-item"><span class="glyphicon glyphicon-folder-open"></span> <a href="#"><span id="folder"></span></a></li>
           <li class="list-group-item"><span class="glyphicon glyphicon-globe"></span><a href="#">http://localhost:6001</a></li>
           <li class="list-group-item"><span class="glyphicon glyphicon-user"></span><a href="#">http://localhost:6001/hoodie/admin</a></li>

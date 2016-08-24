@@ -58,3 +58,13 @@ applist.stop = function(app){
   app.state = 'stopped'
   return applist.update(app)
 }
+
+applist.remove = function(id){
+  return applist.findAll()
+.then (function (apps){
+  apps =apps.filter(function(app){
+    return app.id!==id
+  })
+  localStorage.setItem('apps', JSON.stringify(apps))
+})
+}

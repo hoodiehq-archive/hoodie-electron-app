@@ -28,9 +28,6 @@ applist.find = function (id) {
 }
 
 applist.update = function(app){
-  //console.log(app.state);
-  //app.state = (app.state === 'started') ? 'stopped' : 'started'
-  //console.log(app.state);
   return applist.findAll()
   .then(function (apps) {
     var newApps = apps.map(function (currentApp) {
@@ -61,10 +58,10 @@ applist.stop = function(app){
 
 applist.remove = function(id){
   return applist.findAll()
-.then (function (apps){
-  apps =apps.filter(function(app){
-    return app.id!==id
+  .then (function (apps){
+    apps =apps.filter(function(app){
+      return app.id!==id
+    })
+    localStorage.setItem('apps', JSON.stringify(apps))
   })
-  localStorage.setItem('apps', JSON.stringify(apps))
-})
 }

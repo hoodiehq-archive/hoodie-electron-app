@@ -24,7 +24,7 @@ $showNewAppFormButton.on('click', function () {
 $newAppForm.on('submit', function (event) {
   event.preventDefault()
 
-  // create app array for exisiting apps
+// create app array for exisiting apps
   var app = {
     name: $('#empty-text').val()
   }
@@ -69,15 +69,14 @@ $updateAppForm.on('submit', function (event) {
 })
 
 $deleteButton.on('click',function(event){
-	event.preventDefault()
-	var id = $('#delete-button').data('id')
-	console.log(id)
-	applist.find(id)
-	.then (function(app){
-		applist.remove(id)
-		//renderAppList ()
-		setRoute('')
-	})
+  event.preventDefault()
+  var id = $('#delete-button').data('id')
+  console.log(id)
+  applist.find(id)
+  .then (function(app){
+    applist.remove(id)
+    setRoute('')
+  })
 })
 
 // start button
@@ -103,7 +102,6 @@ $stopAppButton.on('click', function () {
 })
 
 // HELPER METHODS
-
 function setRoute (path) {
   location.hash = '#' + path
 }

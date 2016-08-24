@@ -68,13 +68,25 @@ $updateAppForm.on('submit', function (event) {
 
 // toggle start/stop button
 $startStopAppButton.on('click', function () {
-  $startStopAppButton.find('i').toggleClass('glyphicon-play glyphicon-stop')
-  $startStopAppButton.toggleClass('main-button')
-  // check
-  $('#link-details').toggle()
-  // change
-  var label = $startStopAppButton.find('span').text().trim() === 'Start' ? 'Stop' : 'Start'
-  $startStopAppButton.find('span').text(label)
+   event.preventDefault()
+   var app = {
+     id: $('#name-app').data('id')
+     }
+   applist.start(app)
+       .then(function (app) {
+        $startStopAppButton.find('i').toggleClass('glyphicon-play glyphicon-stop')
+        $startStopAppButton.toggleClass('main-button')
+        // check
+        $('#link-details').toggle()
+        // change
+        var label = $startStopAppButton.find('span').text().trim() === 'Start' ? 'Stop' : 'Start'
+        $startStopAppButton.find('span').text(label)
+          console.log(app.state)
+       })
+
+
+
+
 })
 
 // HELPER METHODS

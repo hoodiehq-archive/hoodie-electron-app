@@ -10,6 +10,7 @@ var $appList = $('#app-list')
 var $goBackButton = $('#go-back-btn')
 var $startAppButton = $('#start-button')
 var $stopAppButton = $('#stop-button')
+var $deleteButton = $('#delete-button')
 
 // INIT APP
 $(document).ready(handleRoute)
@@ -67,7 +68,19 @@ $updateAppForm.on('submit', function (event) {
   }
 })
 
-// start/stop button
+$deleteButton.on('click',function(event){
+	event.preventDefault()
+	var id = $('#delete-button').data('id')
+	console.log(id)
+	applist.find(id)
+	.then (function(app){
+		applist.remove(id)
+		//renderAppList ()
+		setRoute('')
+	})
+})
+
+// start button
 $startAppButton.on('click', function () {
   var app = {
     id: $('#name-app').data('id')
@@ -78,7 +91,7 @@ $startAppButton.on('click', function () {
   })
 })
 
-// start/stop button
+// stop button
 $stopAppButton.on('click', function () {
   var app = {
     id: $('#name-app').data('id')

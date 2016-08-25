@@ -25,7 +25,7 @@ $showNewAppFormButton.on('click', function () {
 $newAppForm.on('submit', function (event) {
   event.preventDefault()
 
-// create app array for exisiting apps
+  // create app array for exisiting apps
   var app = {
     name: $('#empty-text').val()
   }
@@ -140,6 +140,14 @@ function handleRoute () {
 
 function renderNewAppForm () {
   $body.attr('data-state', 'new-app')
+  //emtpy the previous input value
+  // console.log("empty()"+$("#empty-text").empty())
+  // $("#empty-text").empty()
+  // console.log("empty-text,val() after empty()"+$("#empty-text").val())
+
+  console.log("empty-text,val('')"+$("#empty-text").val(""))
+  $("#empty-text").val("")
+  console.log("val() after val('')"+$("#empty-text").val())
 }
 
 function renderAppDetail (id) {
@@ -153,6 +161,9 @@ function renderAppDetail (id) {
     $('#folder').html('~Hoodie/' + app.name)
     $body.attr('data-state', 'app-detail')
   })
+  console.log("rename-app val('')"+$("#rename-app").val(""))
+  $("#rename-app").val("")
+  console.log("rename-app val() after val('')"+$("#rename-app").val())
 }
 
 function renderAppList () {

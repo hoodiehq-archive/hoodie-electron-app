@@ -10,7 +10,7 @@ var $appList = $('#app-list')
 var $goBackButton = $('#go-back-btn')
 var $startAppButton = $('#start-button')
 var $stopAppButton = $('#stop-button')
-var $deleteButton = $('#delete-button')
+var $deleteButton = $('#deletebtn')
 
 // INIT APP
 $(document).ready(handleRoute)
@@ -18,6 +18,7 @@ $(window).on('hashchange', handleRoute)
 
 // EVENT HANDLERS
 $showNewAppFormButton.on('click', function () {
+  $('#empty-text').val('')
   setRoute('new')
 })
 
@@ -70,7 +71,7 @@ $updateAppForm.on('submit', function (event) {
 
 $deleteButton.on('click',function(event){
   event.preventDefault()
-  var id = $('#delete-button').data('id')
+  var id = $('#deletebtn').data('id')
   console.log(id)
   applist.find(id)
   .then (function(app){
@@ -99,6 +100,18 @@ $stopAppButton.on('click', function () {
   .then(function(app){
     $('#detail-app-container').attr('data-state','stopped')
   })
+})
+
+$deletebtn.on('click',function(event){
+	event.preventDefault()
+	var id = $('#deletebtn').data('id')
+	console.log(id)
+	applist.find(id)
+	.then (function(app){
+		applist.remove(id)
+		//renderAppList ()
+		setRoute('')
+	})
 })
 
 // HELPER METHODS
@@ -135,6 +148,7 @@ function renderAppDetail (id) {
   .then(function (app) {
     $('#name-app').html(app.name)
     $('#name-app').attr('data-id', app.id)
+    $('#deletebtn').attr('data-id', app.id)
     $('#detail-app-container').attr('data-state',app.state)
     $('#folder').html('~Hoodie/' + app.name)
     $body.attr('data-state', 'app-detail')

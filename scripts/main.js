@@ -58,7 +58,6 @@ $updateAppForm.on('submit', function (event) {
     id: $('#name-app').data('id'),
     name: changed
   }
-  console.log("app:"+ JSON.stringify(app))
   if (changed) {
     applist.update(app)
     .then(function (app) {
@@ -71,17 +70,14 @@ $updateAppForm.on('submit', function (event) {
 
 $deleteButton.on('click',function(event){
   event.preventDefault()
-  var app = {
-    id: $('#delete-button').data('id')
-  }
+  var id = $('#name-app').data('id')
   //var id = $('#delete-button').data('id')
   //console.log(id)
-  console.log(id)
-  applist.find(id)
+  console.log('#name-app data-id', id)
+  debugger
+  applist.remove(id)
   .then (function(app){
-    applist.remove(app)
     setRoute('')
-    console.log("applist.remove(id)"+applist.remove(app))
   })
 })
 
@@ -148,8 +144,7 @@ function renderAppDetail (id) {
 
   .then(function (app) {
     $('#name-app').html(app.name)
-    $('#name-app').attr('data-id', app.id)
-    $('#delete-Button').attr('data-id', app.id)
+    $('#name-app').data('id', app.id)
     $('#detail-app-container').attr('data-state',app.state)
     $('#folder').html('~Hoodie/' + app.name)
     $body.attr('data-state', 'app-detail')

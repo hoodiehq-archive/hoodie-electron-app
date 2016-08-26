@@ -10,7 +10,7 @@ var $appList = $('#app-list')
 var $goBackButton = $('#go-back-btn')
 var $startAppButton = $('#start-button')
 var $stopAppButton = $('#stop-button')
-var $deleteButton = $('#deletebtn')
+var $deleteButton = $('#delete-button')
 
 // INIT APP
 $(document).ready(handleRoute)
@@ -71,12 +71,17 @@ $updateAppForm.on('submit', function (event) {
 
 $deleteButton.on('click',function(event){
   event.preventDefault()
-  var id = $('#deletebtn').data('id')
+  var app = {
+    id: $('#delete-button').data('id')
+  }
+  //var id = $('#delete-button').data('id')
+  //console.log(id)
   console.log(id)
   applist.find(id)
   .then (function(app){
-    applist.remove(id)
+    applist.remove(app)
     setRoute('')
+    console.log("applist.remove(id)"+applist.remove(app))
   })
 })
 
@@ -100,18 +105,6 @@ $stopAppButton.on('click', function () {
   .then(function(app){
     $('#detail-app-container').attr('data-state','stopped')
   })
-})
-
-$deletebtn.on('click',function(event){
-	event.preventDefault()
-	var id = $('#deletebtn').data('id')
-	console.log(id)
-	applist.find(id)
-	.then (function(app){
-		applist.remove(id)
-		//renderAppList ()
-		setRoute('')
-	})
 })
 
 // HELPER METHODS
@@ -156,7 +149,7 @@ function renderAppDetail (id) {
   .then(function (app) {
     $('#name-app').html(app.name)
     $('#name-app').attr('data-id', app.id)
-    $('#deletebtn').attr('data-id', app.id)
+    $('#delete-Button').attr('data-id', app.id)
     $('#detail-app-container').attr('data-state',app.state)
     $('#folder').html('~Hoodie/' + app.name)
     $body.attr('data-state', 'app-detail')

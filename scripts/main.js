@@ -70,10 +70,11 @@ $updateAppForm.on('submit', function (event) {
 
 $deleteButton.on('click',function(event){
   event.preventDefault()
-  var id = $('#name-app').data('id')
+  //var id = $('#name-app').data('id')
+  var id = $('#detail-app-container').data('id')
   //var id = $('#delete-button').data('id')
   //console.log(id)
-  console.log('#name-app data-id', id)
+  console.log('#detail-app-container data-id', id)
   debugger
   applist.remove(id)
   .then (function(app){
@@ -144,8 +145,9 @@ function renderAppDetail (id) {
 
   .then(function (app) {
     $('#name-app').html(app.name)
-    $('#name-app').data('id', app.id)
+    //$('#name-app').data('id', app.id)
     $('#detail-app-container').attr('data-state',app.state)
+    $('#detail-app-container').data('id', app.id)
     $('#folder').html('~Hoodie/' + app.name)
     $body.attr('data-state', 'app-detail')
   })

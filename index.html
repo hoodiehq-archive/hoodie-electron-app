@@ -72,7 +72,7 @@
           <h3 id="name-app" data-id="" class="text-center"></h3>
         </div>
         <div class="col-sm-4">
-          <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#rename-modal">
+          <button id="edit-button" type="button" class="btn btn-default pull-right" >
             <span class="glyphicon glyphicon-pencil"></span>
           </button>
         </div>
@@ -93,35 +93,62 @@
           <li class="list-group-item"><span class="glyphicon glyphicon-globe"></span><a href="#">http://localhost:6001</a></li>
           <li class="list-group-item"><span class="glyphicon glyphicon-user"></span><a href="#">http://localhost:6001/hoodie/admin</a></li>
         </ul>
-      </div><!-- /.main-content -->
+      </div>
 
-      <!-- modal: change app name -->
-      <div class="modal fade" id="rename-modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-sm" role="document">
-          <form class="modal-content" id="form-update-app">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <h4 class="modal-title text-center" id="renameFromLabel">Change App Name</h4>
+      <!-- /.main-content -->
+    </section>
+    <!-- <div  tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-sm" role="document">
+        <form class="modal-content" id="form-update-app">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title text-center" id="renameFromLabel">Change App Name</h4>
+          </div>
+          <div class="modal-body">
+            <div class="control-group">
+              <label class="control-label" for="rename-app">New App Name:</label>
+              <input class="form-control" id="rename-app" type="text" placeholder="Rename App here...">
             </div>
-            <div class="modal-body">
-              <div class="control-group">
-                <label class="control-label" for="rename-app">New App Name:</label>
-                <input class="form-control" id="rename-app" type="text" placeholder="Rename App here...">
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-              <button type="submit" class="btn btn-primary" id="js-change-appname">Apply</button>
-            </div>
-          </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="js-change-appname">Apply</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <button type="button" id="delete-button" data-id="" class="btn btn-sm center-block">
+      <i class="glyphicon glyphicon-trash" aria-hidden="true"></i> <span>Delete</span>
+    </button> -->
+<section  id="rename-modal">
+  <div  tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+      <form class="modal-content" id="form-update-app">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title text-center" id="renameFromLabel">Change App Name</h4>
         </div>
-      </div><!-- /.modal -->
-      <button type="button" id="delete-button" data-id="" class="btn btn-sm center-block">
-        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i> <span>Delete</span>
-      </button>
-    </section><!-- /detail-app-container -->
+        <div class="modal-body">
+          <div class="control-group">
+            <label class="control-label" for="rename-app">New App Name:</label>
+            <input class="form-control" id="rename-app" type="text" placeholder="Rename App here...">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="js-change-appname">Apply</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+</section><!-- /detail-app-container -->
 
     <div class="container-fluid">
       <div class="footer">

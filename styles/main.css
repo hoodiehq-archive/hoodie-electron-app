@@ -14,6 +14,30 @@ section {
   display: block;
 }
 
+/* show / hide main-button */
+#start-button, #stop-button {
+  display: none;
+}
+[data-state="started"] #stop-button,
+[data-state="stopped"] #start-button{
+  display: block;
+}
+
+#link-details{
+  display: none;
+}
+[data-state="started"] #link-details{
+  display: block;
+}
+
+#stop-button{
+ margin-bottom: 10px;
+}
+
+#delete-button{
+ margin-bottom: 10px;
+}
+
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .footer {
   padding-left: 15px;

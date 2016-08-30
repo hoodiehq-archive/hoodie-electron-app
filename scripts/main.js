@@ -8,7 +8,9 @@ var $updateAppForm = $('#form-update-app')
 var $cancelNewAppFormButton = $('#cancel-create')
 var $appList = $('#app-list')
 var $goBackButton = $('#go-back-btn')
-var $startStopAppButton = $('#main-button')
+var $startAppButton = $('#start-button')
+var $stopAppButton = $('#stop-button')
+var $deleteButton = $('#delete-button')
 
 // INIT APP
 $(document).ready(handleRoute)
@@ -28,9 +30,10 @@ $newAppForm.on('submit', function (event) {
   }
   if (app.name) {
     applist.add(app)
-      .then(function (app) {
-        setRoute(app.id)
-      })
+
+    .then(function (app) {
+      setRoute(app.id)
+    })
   }
 })
 
@@ -55,33 +58,58 @@ $updateAppForm.on('submit', function (event) {
     id: $('#name-app').data('id'),
     name: changed
   }
-  console.log("app:"+ JSON.stringify(app))
   if (changed) {
     applist.update(app)
-      .then(function (app) {
-        $('#name-app').text(app.name)
-        $('#folder').text('~Hoodie/' + app.name)
-        $updateAppForm.closest('.modal').modal('hide')
-      })
-    }
+
+    .then(function (app) {
+      $('#name-app').text(app.name)
+      $('#folder').text('~Hoodie/' + app.name)
+      $updateAppForm.closest('.modal').modal('hide')
+    })
+  }
 })
 
-// toggle start/stop button
-$startStopAppButton.on('click', function () {
-  $startStopAppButton.find('i').toggleClass('glyphicon-play glyphicon-stop')
-  $startStopAppButton.toggleClass('main-button')
-  // check
-  $('#link-details').toggle()
-  // change
-  var label = $startStopAppButton.find('span').text().trim() === 'Start' ? 'Stop' : 'Start'
-  $startStopAppButton.find('span').text(label)
+$deleteButton.on('click',function(event){
+  event.preventDefault()
+  var id = $('#detail-app-container').data('id')
+  console.log('#detail-app-container data-id', id)
+  debugger
+  applist.remove(id)
+
+  .then (function(app){
+    setRoute('')
+  })
+})
+
+// start button
+$startAppButton.on('click', function () {
+  var app = {
+    id: $('#detail-app-container').data('id')
+  }
+  applist.start(app)
+
+  .then(function(app){
+    $('#detail-app-container').attr('data-state','started')
+  })
+})
+
+// stop button
+$stopAppButton.on('click', function () {
+  var app = {
+    id:  $('#detail-app-container').data('id')
+  }
+  applist.stop(app)
+
+  .then(function(app){
+    $('#detail-app-container').attr('data-state','stopped')
+  })
 })
 
 // HELPER METHODS
-
 function setRoute (path) {
   location.hash = '#' + path
 }
+
 function handleRoute () {
   var path = location.hash.substr(1)
 
@@ -103,6 +131,7 @@ function handleRoute () {
 
 function renderNewAppForm () {
   $body.attr('data-state', 'new-app')
+  $("#empty-text").val("")
 }
 
 function renderAppDetail (id) {
@@ -110,31 +139,30 @@ function renderAppDetail (id) {
 
   .then(function (app) {
     $('#name-app').html(app.name)
-    // $('#name-app').data('id', ""+app.id)
-    $('#name-app').attr('data-id', ""+app.id)
-    // $('#name-app').prop('data-id', ""+app.id)
-    // console.log(app.id)
+    $('#detail-app-container').attr('data-state',app.state)
+    $('#detail-app-container').data('id', app.id)
     $('#folder').html('~Hoodie/' + app.name)
     $body.attr('data-state', 'app-detail')
   })
+  $("#rename-app").val("")
 }
 
 function renderAppList () {
   $body.attr('data-state', 'dashboard')
-
   $appList.empty()
   applist.findAll()
-    .then(function (apps) {
-      apps.forEach(function (app) {
-        var html = `
-          <li data-id="${app.id}" class="list-group-item"
-            <button type="button" class="btn btn-lg btn-block">
-              ${app.name || '-'}
-              <i class="glyphicon glyphicon-play-circle pull-right"></i>
-            </button>
-          </li>
-        `
-        $appList.append(html)
-      })
+
+  .then(function (apps) {
+    apps.forEach(function (app) {
+      var html = `
+      <li data-id="${app.id}" class="list-group-item"
+      <button type="button" class="btn btn-lg btn-block">
+      ${app.name || '-'}
+      <i class="glyphicon glyphicon-play-circle pull-right"></i>
+      </button>
+      </li>
+      `
+      $appList.append(html)
     })
+  })
 }

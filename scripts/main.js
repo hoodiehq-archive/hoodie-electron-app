@@ -18,7 +18,6 @@ $(window).on('hashchange', handleRoute)
 
 // EVENT HANDLERS
 $showNewAppFormButton.on('click', function () {
-  $('#empty-text').val('')
   setRoute('new')
 })
 
@@ -31,6 +30,7 @@ $newAppForm.on('submit', function (event) {
   }
   if (app.name) {
     applist.add(app)
+
     .then(function (app) {
       setRoute(app.id)
     })
@@ -60,6 +60,7 @@ $updateAppForm.on('submit', function (event) {
   }
   if (changed) {
     applist.update(app)
+
     .then(function (app) {
       $('#name-app').text(app.name)
       $('#folder').text('~Hoodie/' + app.name)
@@ -70,13 +71,11 @@ $updateAppForm.on('submit', function (event) {
 
 $deleteButton.on('click',function(event){
   event.preventDefault()
-  //var id = $('#name-app').data('id')
   var id = $('#detail-app-container').data('id')
-  //var id = $('#delete-button').data('id')
-  //console.log(id)
   console.log('#detail-app-container data-id', id)
   debugger
   applist.remove(id)
+
   .then (function(app){
     setRoute('')
   })
@@ -85,9 +84,10 @@ $deleteButton.on('click',function(event){
 // start button
 $startAppButton.on('click', function () {
   var app = {
-    id: $('#name-app').data('id')
+    id: $('#detail-app-container').data('id')
   }
   applist.start(app)
+
   .then(function(app){
     $('#detail-app-container').attr('data-state','started')
   })
@@ -96,9 +96,10 @@ $startAppButton.on('click', function () {
 // stop button
 $stopAppButton.on('click', function () {
   var app = {
-    id: $('#name-app').data('id')
+    id:  $('#detail-app-container').data('id')
   }
   applist.stop(app)
+
   .then(function(app){
     $('#detail-app-container').attr('data-state','stopped')
   })
@@ -130,14 +131,7 @@ function handleRoute () {
 
 function renderNewAppForm () {
   $body.attr('data-state', 'new-app')
-  //emtpy the previous input value
-  // console.log("empty()"+$("#empty-text").empty())
-  // $("#empty-text").empty()
-  // console.log("empty-text,val() after empty()"+$("#empty-text").val())
-
-  console.log("empty-text,val('')"+$("#empty-text").val(""))
   $("#empty-text").val("")
-  console.log("val() after val('')"+$("#empty-text").val())
 }
 
 function renderAppDetail (id) {
@@ -145,22 +139,19 @@ function renderAppDetail (id) {
 
   .then(function (app) {
     $('#name-app').html(app.name)
-    //$('#name-app').data('id', app.id)
     $('#detail-app-container').attr('data-state',app.state)
     $('#detail-app-container').data('id', app.id)
     $('#folder').html('~Hoodie/' + app.name)
     $body.attr('data-state', 'app-detail')
   })
-  console.log("rename-app val('')"+$("#rename-app").val(""))
   $("#rename-app").val("")
-  console.log("rename-app val() after val('')"+$("#rename-app").val())
 }
 
 function renderAppList () {
   $body.attr('data-state', 'dashboard')
-
   $appList.empty()
   applist.findAll()
+
   .then(function (apps) {
     apps.forEach(function (app) {
       var html = `

@@ -42,6 +42,7 @@ applist.update = function(app){
       return currentApp
     })
     localStorage.setItem('apps', JSON.stringify(newApps))
+    //console.log(app.state)
     return app
   })
 }

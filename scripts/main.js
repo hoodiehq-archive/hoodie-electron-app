@@ -11,6 +11,8 @@ var $goBackButton = $('#go-back-btn')
 var $startAppButton = $('#start-button')
 var $stopAppButton = $('#stop-button')
 var $deleteButton = $('#delete-button')
+var $editButton = $('#edit-button')
+var $submitButton = $('#js-change-appname')
 
 // INIT APP
 $(document).ready(handleRoute)
@@ -51,8 +53,18 @@ $goBackButton.on('click', function () {
   setRoute('')
 })
 
+$editButton.on('click', function(event){
+  console.log('test')
+$body.attr('data-state', 'update-app')
+//  if($submitButton.clicked == true)
+// {
+//
+// }
+})
 $updateAppForm.on('submit', function (event) {
   event.preventDefault()
+  //rendeupdateform()
+
   var changed = $('#rename-app').val()
   var app = {
     id: $('#name-app').data('id'),
@@ -64,16 +76,35 @@ $updateAppForm.on('submit', function (event) {
     .then(function (app) {
       $('#name-app').text(app.name)
       $('#folder').text('~Hoodie/' + app.name)
-      $updateAppForm.closest('.modal').modal('hide')
+      //$updateAppForm.closest('.modal').modal('hide')
     })
   }
 })
+
+// $updateAppForm.on('submit', function (event) {
+//   event.preventDefault()
+//   //rendeupdateform()
+//
+//   var changed = $('#rename-app').val()
+//   var app = {
+//     id: $('#name-app').data('id'),
+//     name: changed
+//   }
+//   if (changed) {
+//     applist.update(app)
+//     .then(function (app) {
+//       $('#name-app').text(app.name)
+//       $('#folder').text('~Hoodie/' + app.name)
+//       //$updateAppForm.closest('.modal').modal('hide')
+//     })
+//   }
+// })
 
 $deleteButton.on('click',function(event){
   event.preventDefault()
   var id = $('#detail-app-container').data('id')
   console.log('#detail-app-container data-id', id)
-  debugger
+  //debugger
   applist.remove(id)
 
   .then (function(app){
@@ -146,6 +177,10 @@ function renderAppDetail (id) {
   })
   $("#rename-app").val("")
 }
+
+// function rendeupdateform(){
+//     $body.attr('data-state', 'update-app')
+// }
 
 function renderAppList () {
   $body.attr('data-state', 'dashboard')

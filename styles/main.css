@@ -10,6 +10,7 @@ section {
 }
 [data-state="dashboard"] #apps-container,
 [data-state="new-app"] #create-app-container,
+[data-state="update-app"] #rename-modal,
 [data-state="app-detail"] #detail-app-container {
   display: block;
 }

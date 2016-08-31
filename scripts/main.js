@@ -13,7 +13,7 @@ var $stopAppButton = $('#stop-button')
 var $deleteButton = $('#delete-button')
 var $editButton = $('#edit-button')
 var $submitButton = $('#js-change-appname')
-
+var $cancelButton = $('#cancelButton')
 // INIT APP
 $(document).ready(handleRoute)
 $(window).on('hashchange', handleRoute)
@@ -54,17 +54,10 @@ $goBackButton.on('click', function () {
 })
 
 $editButton.on('click', function(event){
-  console.log('test')
 $body.attr('data-state', 'update-app')
-//  if($submitButton.clicked == true)
-// {
-//
-// }
-})
+var id = $('#name-app').data('id')
 $updateAppForm.on('submit', function (event) {
   event.preventDefault()
-  //rendeupdateform()
-
   var changed = $('#rename-app').val()
   var app = {
     id: $('#name-app').data('id'),
@@ -74,39 +67,22 @@ $updateAppForm.on('submit', function (event) {
     applist.update(app)
 
     .then(function (app) {
-      $('#name-app').text(app.name)
+      $('#rename-app').text(app.name)
       $('#folder').text('~Hoodie/' + app.name)
-      //$updateAppForm.closest('.modal').modal('hide')
+      renderAppDetail(id)
+
     })
   }
+  })
+  $cancelButton.on('click',function(event){
+      renderAppDetail(id)
 })
-
-// $updateAppForm.on('submit', function (event) {
-//   event.preventDefault()
-//   //rendeupdateform()
-//
-//   var changed = $('#rename-app').val()
-//   var app = {
-//     id: $('#name-app').data('id'),
-//     name: changed
-//   }
-//   if (changed) {
-//     applist.update(app)
-//     .then(function (app) {
-//       $('#name-app').text(app.name)
-//       $('#folder').text('~Hoodie/' + app.name)
-//       //$updateAppForm.closest('.modal').modal('hide')
-//     })
-//   }
-// })
+})
 
 $deleteButton.on('click',function(event){
   event.preventDefault()
   var id = $('#detail-app-container').data('id')
-  console.log('#detail-app-container data-id', id)
-  //debugger
   applist.remove(id)
-
   .then (function(app){
     setRoute('')
   })
@@ -172,16 +148,12 @@ function renderAppDetail (id) {
     $('#name-app').html(app.name)
     $('#detail-app-container').attr('data-state',app.state)
     $('#detail-app-container').data('id', app.id)
+    $('#name-app').data('id', app.id)
     $('#folder').html('~Hoodie/' + app.name)
     $body.attr('data-state', 'app-detail')
   })
   $("#rename-app").val("")
 }
-
-// function rendeupdateform(){
-//     $body.attr('data-state', 'update-app')
-// }
-
 function renderAppList () {
   $body.attr('data-state', 'dashboard')
   $appList.empty()

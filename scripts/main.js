@@ -11,6 +11,8 @@ var $goBackButton = $('#go-back-btn')
 var $startAppButton = $('#start-button')
 var $stopAppButton = $('#stop-button')
 var $deleteButton = $('#delete-button')
+var $editButton = $('#edit-button')
+var $cancelButton = $('#cancelButton')
 
 // INIT APP
 $(document).ready(handleRoute)
@@ -51,32 +53,36 @@ $goBackButton.on('click', function () {
   setRoute('')
 })
 
-$updateAppForm.on('submit', function (event) {
-  event.preventDefault()
-  var changed = $('#rename-app').val()
-  var app = {
-    id: $('#name-app').data('id'),
-    name: changed
-  }
-  if (changed) {
-    applist.update(app)
+$editButton.on('click', function (event) {
+  $body.attr('data-state', 'edit-app')
+  var id = $('#name-app').data('id')
+  $updateAppForm.on('submit', function (event) {
+    event.preventDefault()
+    var changed = $('#rename-app').val()
+    var app = {
+      id: $('#name-app').data('id'),
+      name: changed
+    }
+    if (changed) {
+      applist.update(app)
 
-    .then(function (app) {
-      $('#name-app').text(app.name)
-      $('#folder').text('~Hoodie/' + app.name)
-      $updateAppForm.closest('.modal').modal('hide')
-    })
-  }
+      .then(function (app) {
+        $('#rename-app').text(app.name)
+        $('#folder').text('~Hoodie/' + app.name)
+        renderAppDetail(id)
+      })
+    }
+  })
+  $cancelButton.on('click', function (event) {
+    renderAppDetail(id)
+  })
 })
 
-$deleteButton.on('click',function(event){
+$deleteButton.on('click', function (event) {
   event.preventDefault()
   var id = $('#detail-app-container').data('id')
-  console.log('#detail-app-container data-id', id)
-  debugger
   applist.remove(id)
-
-  .then (function(app){
+  .then(function (app) {
     setRoute('')
   })
 })
@@ -88,20 +94,20 @@ $startAppButton.on('click', function () {
   }
   applist.start(app)
 
-  .then(function(app){
-    $('#detail-app-container').attr('data-state','started')
+  .then(function (app) {
+    $('#detail-app-container').attr('data-state', 'started')
   })
 })
 
 // stop button
 $stopAppButton.on('click', function () {
   var app = {
-    id:  $('#detail-app-container').data('id')
+    id: $('#detail-app-container').data('id')
   }
   applist.stop(app)
 
-  .then(function(app){
-    $('#detail-app-container').attr('data-state','stopped')
+  .then(function (app) {
+    $('#detail-app-container').attr('data-state', 'stopped')
   })
 })
 
@@ -131,7 +137,7 @@ function handleRoute () {
 
 function renderNewAppForm () {
   $body.attr('data-state', 'new-app')
-  $("#empty-text").val("")
+  $('#empty-text').val('')
 }
 
 function renderAppDetail (id) {
@@ -139,14 +145,14 @@ function renderAppDetail (id) {
 
   .then(function (app) {
     $('#name-app').html(app.name)
-    $('#detail-app-container').attr('data-state',app.state)
+    $('#detail-app-container').attr('data-state', app.state)
     $('#detail-app-container').data('id', app.id)
+    $('#name-app').data('id', app.id)
     $('#folder').html('~Hoodie/' + app.name)
     $body.attr('data-state', 'app-detail')
   })
-  $("#rename-app").val("")
+  $('#rename-app').val('')
 }
-
 function renderAppList () {
   $body.attr('data-state', 'dashboard')
   $appList.empty()

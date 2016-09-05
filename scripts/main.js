@@ -56,26 +56,16 @@ $goBackButton.on('click', function () {
 $editButton.on('click', function(event){
 $body.attr('data-state', 'update-app')
 var id = $('#name-app').data('id')
+setRoute(id + '/edit')
+handleEditRout()
 $updateAppForm.on('submit', function (event) {
   event.preventDefault()
-  var changed = $('#rename-app').val()
-  var app = {
-    id: $('#name-app').data('id'),
-    name: changed
-  }
-  if (changed) {
-    applist.update(app)
-
-    .then(function (app) {
-      $('#rename-app').text(app.name)
-      $('#folder').text('~Hoodie/' + app.name)
-      renderAppDetail(id)
-
-    })
-  }
+  setRoute(id)
   })
   $cancelButton.on('click',function(event){
       renderAppDetail(id)
+      setRoute(id)
+
 })
 })
 
@@ -116,9 +106,16 @@ $stopAppButton.on('click', function () {
 function setRoute (path) {
   location.hash = '#' + path
 }
+function handleEditRout(){
+  var pathedit =location.hash.substr(-5)
+  var id = location.hash.substr(0, location.hash.length - 5)
+  renderEditAppForm(id)
+  return
+}
 
 function handleRoute () {
   var path = location.hash.substr(1)
+  var pathedit =location.hash.substr(-5)
 
   if (path === '') {
     console.log('route: dashboard')
@@ -131,8 +128,7 @@ function handleRoute () {
     renderNewAppForm()
     return
   }
-
-  console.log(`route: app detail (id: ${path})`)
+    console.log(`route: app detail (id: ${path})`)
   renderAppDetail(path)
 }
 
@@ -172,4 +168,23 @@ function renderAppList () {
       $appList.append(html)
     })
   })
+}
+function renderEditAppForm(id){
+
+  var changed = $('#rename-app').val()
+  var app = {
+    id: $('#name-app').data('id'),
+    name: changed
+  }
+  if (changed) {
+    applist.update(app)
+
+    .then(function (app) {
+      $('#rename-app').text(app.name)
+      $('#folder').text('~Hoodie/' + app.name)
+      renderAppDetail(id)
+
+    })
+  }
+
 }

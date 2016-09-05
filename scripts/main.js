@@ -172,7 +172,7 @@ function renderEditAppForm(id){
 
   var changed = $('#rename-app').val()
   var app = {
-    id:id,
+    id: id,
     name: changed
   }
   if (changed) {
@@ -181,7 +181,7 @@ function renderEditAppForm(id){
     .then(function (app) {
       $('#rename-app').text(app.name)
       $('#folder').text('~Hoodie/' + app.name)
-      renderAppDetail(id)
+      setRoute(id)
 
     })
   }

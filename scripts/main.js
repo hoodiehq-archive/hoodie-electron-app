@@ -63,9 +63,7 @@ $updateAppForm.on('submit', function (event) {
   setRoute(id)
   })
   $cancelButton.on('click',function(event){
-      renderAppDetail(id)
       setRoute(id)
-
 })
 })
 
@@ -173,7 +171,7 @@ function renderEditAppForm(id){
 
   var changed = $('#rename-app').val()
   var app = {
-    id: $('#name-app').data('id'),
+    id: id,
     name: changed
   }
   if (changed) {
@@ -182,7 +180,7 @@ function renderEditAppForm(id){
     .then(function (app) {
       $('#rename-app').text(app.name)
       $('#folder').text('~Hoodie/' + app.name)
-      renderAppDetail(id)
+      setRoute(id)
 
     })
   }

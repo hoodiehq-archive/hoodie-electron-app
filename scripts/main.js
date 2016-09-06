@@ -52,30 +52,32 @@ $appList.on('click', 'li', function (event) {
 $goBackButton.on('click', function () {
   setRoute('')
 })
+$editButton.on('click', function(event){
+var id = $('#name-app').data('id')
+setRoute(id + '/edit')
+})
 
-$editButton.on('click', function (event) {
-  $body.attr('data-state', 'edit-app')
+$updateAppForm.on('submit', function (event) {
+  event.preventDefault()
+
+  var id = $('#edit-app-container').data('id')
+  var newName = $('#rename-app').val()
+  var app = {
+    id: id,
+    name: newName
+  }
+  if (newName) {
+    applist.update(app)
+
+    .then(function (app) {
+      setRoute(id)
+    })
+  }
+})
+
+$cancelButton.on('click',function(event){
   var id = $('#name-app').data('id')
-  $updateAppForm.on('submit', function (event) {
-    event.preventDefault()
-    var changed = $('#rename-app').val()
-    var app = {
-      id: $('#name-app').data('id'),
-      name: changed
-    }
-    if (changed) {
-      applist.update(app)
-
-      .then(function (app) {
-        $('#rename-app').text(app.name)
-        $('#folder').text('~Hoodie/' + app.name)
-        renderAppDetail(id)
-      })
-    }
-  })
-  $cancelButton.on('click', function (event) {
-    renderAppDetail(id)
-  })
+  setRoute(id)
 })
 
 $deleteButton.on('click', function (event) {
@@ -131,7 +133,13 @@ function handleRoute () {
     return
   }
 
-  console.log(`route: app detail (id: ${path})`)
+  if (path.substr(-5) === '/edit') {
+    var id = path.substr(0, path.length - 5)
+    console.log(`route: app edit (id: ${id})`)
+    renderEditAppForm(id)
+    return
+  }
+
   renderAppDetail(path)
 }
 
@@ -151,7 +159,6 @@ function renderAppDetail (id) {
     $('#folder').html('~Hoodie/' + app.name)
     $body.attr('data-state', 'app-detail')
   })
-  $('#rename-app').val('')
 }
 function renderAppList () {
   $body.attr('data-state', 'dashboard')
@@ -171,4 +178,14 @@ function renderAppList () {
       $appList.append(html)
     })
   })
+}
+function renderEditAppForm(id){
+  applist.find(id)
+
+  .then(function (app) {
+    $body.attr('data-state', 'edit-app')
+    $('#rename-app').val(app.name)
+    $('#edit-app-container').data('id', app.id)
+  })
+  $('#rename-app').val('')
 }

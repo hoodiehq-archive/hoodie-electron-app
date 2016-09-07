@@ -31,17 +31,18 @@ $showNewAppFormButton.on('click', function () {
 $newAppForm.on('submit', function (event) {
   event.preventDefault()
 
-  // create app array for exisiting apps
   var app = {
     name: $newAppName.val()
   }
-  if (app.name) {
-    Apps.add(app)
 
-      .then(function (app) {
-        setRoute(app.id)
-      })
+  if (!app.name) {
+    return
   }
+
+  Apps.add(app)
+    .then(function (app) {
+      setRoute(app.id)
+    })
 })
 
 $cancelNewAppFormButton.on('click', function () {
@@ -71,9 +72,9 @@ $updateAppForm.on('submit', function (event) {
     id: id,
     name: newName
   }
+
   if (newName) {
     Apps.update(app)
-
       .then(function (app) {
         setRoute(id)
       })
@@ -99,8 +100,8 @@ $startAppButton.on('click', function () {
   var app = {
     id: $detailAppContainer.data('id')
   }
-  Apps.start(app)
 
+  Apps.start(app)
     .then(function (app) {
       $detailAppContainer.attr('data-state', 'started')
     })
@@ -111,14 +112,14 @@ $stopAppButton.on('click', function () {
   var app = {
     id: $detailAppContainer.data('id')
   }
-  Apps.stop(app)
 
+  Apps.stop(app)
     .then(function (app) {
       $detailAppContainer.attr('data-state', 'stopped')
     })
 })
 
-// HELPER METHODS
+// ROUTING
 function setRoute (path) {
   location.hash = '#' + path
 }
@@ -148,6 +149,7 @@ function handleRoute () {
   renderAppDetail(path)
 }
 
+// RENDER VIEWS
 function renderNewAppForm () {
   $body.attr('data-state', 'new-app')
   $newAppName.val('')
@@ -173,13 +175,13 @@ function renderAppList () {
     .then(function (apps) {
       apps.forEach(function (app) {
         var html = `
-      <li data-id="${app.id}" class="list-group-item"
-      <button type="button" class="btn btn-lg btn-block">
-      ${app.name || '-'}
-      <i class="glyphicon glyphicon-play-circle pull-right"></i>
-      </button>
-      </li>
-      `
+        <li data-id="${app.id}" class="list-group-item"
+        <button type="button" class="btn btn-lg btn-block">
+        ${app.name || '-'}
+        <i class="glyphicon glyphicon-play-circle pull-right"></i>
+        </button>
+        </li>
+        `
         $appList.append(html)
       })
     })

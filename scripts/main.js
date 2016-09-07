@@ -13,6 +13,7 @@ var $stopAppButton = $('#stop-button')
 var $deleteButton = $('#delete-button')
 var $editButton = $('#edit-button')
 var $cancelButton = $('#cancelButton')
+var $detailAppContainer = $('#detail-app-container')
 
 // INIT APP
 $(document).ready(handleRoute)
@@ -82,7 +83,7 @@ $cancelButton.on('click', function (event) {
 
 $deleteButton.on('click', function (event) {
   event.preventDefault()
-  var id = $('#detail-app-container').data('id')
+  var id = $detailAppContainer.data('id')
   Apps.remove(id)
     .then(function (app) {
       setRoute('')
@@ -92,24 +93,24 @@ $deleteButton.on('click', function (event) {
 // start button
 $startAppButton.on('click', function () {
   var app = {
-    id: $('#detail-app-container').data('id')
+    id: $detailAppContainer.data('id')
   }
   Apps.start(app)
 
     .then(function (app) {
-      $('#detail-app-container').attr('data-state', 'started')
+      $detailAppContainer.attr('data-state', 'started')
     })
 })
 
 // stop button
 $stopAppButton.on('click', function () {
   var app = {
-    id: $('#detail-app-container').data('id')
+    id: $detailAppContainer.data('id')
   }
   Apps.stop(app)
 
     .then(function (app) {
-      $('#detail-app-container').attr('data-state', 'stopped')
+      $detailAppContainer.attr('data-state', 'stopped')
     })
 })
 
@@ -153,8 +154,8 @@ function renderAppDetail (id) {
 
     .then(function (app) {
       $('#name-app').html(app.name)
-      $('#detail-app-container').attr('data-state', app.state)
-      $('#detail-app-container').data('id', app.id)
+      $detailAppContainer.attr('data-state', app.state)
+      $detailAppContainer.data('id', app.id)
       $('#name-app').data('id', app.id)
       $('#folder').html('~Hoodie/' + app.name)
       $body.attr('data-state', 'app-detail')

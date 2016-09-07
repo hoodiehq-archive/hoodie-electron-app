@@ -4,6 +4,7 @@
 var $body = $(document.body)
 var $showNewAppFormButton = $('#new-app-btn')
 var $newAppForm = $('#form-new-app')
+var $newAppName = $('#new-app-name')
 var $updateAppForm = $('#form-update-app')
 var $cancelNewAppFormButton = $('#cancel-create')
 var $appList = $('#app-list')
@@ -29,7 +30,7 @@ $newAppForm.on('submit', function (event) {
 
   // create app array for exisiting apps
   var app = {
-    name: $('#new-app-name').val()
+    name: $newAppName.val()
   }
   if (app.name) {
     Apps.add(app)
@@ -146,7 +147,7 @@ function handleRoute () {
 
 function renderNewAppForm () {
   $body.attr('data-state', 'new-app')
-  $('#new-app-name').val('')
+  $newAppName.val('')
 }
 
 function renderAppDetail (id) {

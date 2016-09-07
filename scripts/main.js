@@ -8,6 +8,7 @@ var $newAppName = $('#new-app-name')
 var $updateAppForm = $('#form-update-app')
 var $cancelNewAppFormButton = $('#cancel-create')
 var $appList = $('#app-list')
+var $appName = $('#app-name')
 var $goBackButton = $('#go-back-btn')
 var $startAppButton = $('#start-button')
 var $stopAppButton = $('#stop-button')
@@ -55,7 +56,7 @@ $goBackButton.on('click', function () {
   setRoute('')
 })
 $editButton.on('click', function (event) {
-  var id = $('#name-app').data('id')
+  var id = $appName.data('id')
   setRoute(id + '/edit')
 })
 
@@ -78,7 +79,7 @@ $updateAppForm.on('submit', function (event) {
 })
 
 $cancelButton.on('click', function (event) {
-  var id = $('#name-app').data('id')
+  var id = $appName.data('id')
   setRoute(id)
 })
 
@@ -154,10 +155,10 @@ function renderAppDetail (id) {
   Apps.find(id)
 
     .then(function (app) {
-      $('#name-app').html(app.name)
+      $appName.html(app.name)
       $detailAppContainer.attr('data-state', app.state)
       $detailAppContainer.data('id', app.id)
-      $('#name-app').data('id', app.id)
+      $appName.data('id', app.id)
       $('#folder').html('~Hoodie/' + app.name)
       $body.attr('data-state', 'app-detail')
     })

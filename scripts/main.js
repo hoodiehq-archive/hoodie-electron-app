@@ -33,9 +33,9 @@ $newAppForm.on('submit', function (event) {
   if (app.name) {
     applist.add(app)
 
-    .then(function (app) {
-      setRoute(app.id)
-    })
+      .then(function (app) {
+        setRoute(app.id)
+      })
   }
 })
 
@@ -52,9 +52,9 @@ $appList.on('click', 'li', function (event) {
 $goBackButton.on('click', function () {
   setRoute('')
 })
-$editButton.on('click', function(event){
-var id = $('#name-app').data('id')
-setRoute(id + '/edit')
+$editButton.on('click', function (event) {
+  var id = $('#name-app').data('id')
+  setRoute(id + '/edit')
 })
 
 $updateAppForm.on('submit', function (event) {
@@ -69,13 +69,13 @@ $updateAppForm.on('submit', function (event) {
   if (newName) {
     applist.update(app)
 
-    .then(function (app) {
-      setRoute(id)
-    })
+      .then(function (app) {
+        setRoute(id)
+      })
   }
 })
 
-$cancelButton.on('click',function(event){
+$cancelButton.on('click', function (event) {
   var id = $('#name-app').data('id')
   setRoute(id)
 })
@@ -84,9 +84,9 @@ $deleteButton.on('click', function (event) {
   event.preventDefault()
   var id = $('#detail-app-container').data('id')
   applist.remove(id)
-  .then(function (app) {
-    setRoute('')
-  })
+    .then(function (app) {
+      setRoute('')
+    })
 })
 
 // start button
@@ -96,9 +96,9 @@ $startAppButton.on('click', function () {
   }
   applist.start(app)
 
-  .then(function (app) {
-    $('#detail-app-container').attr('data-state', 'started')
-  })
+    .then(function (app) {
+      $('#detail-app-container').attr('data-state', 'started')
+    })
 })
 
 // stop button
@@ -108,9 +108,9 @@ $stopAppButton.on('click', function () {
   }
   applist.stop(app)
 
-  .then(function (app) {
-    $('#detail-app-container').attr('data-state', 'stopped')
-  })
+    .then(function (app) {
+      $('#detail-app-container').attr('data-state', 'stopped')
+    })
 })
 
 // HELPER METHODS
@@ -151,23 +151,23 @@ function renderNewAppForm () {
 function renderAppDetail (id) {
   applist.find(id)
 
-  .then(function (app) {
-    $('#name-app').html(app.name)
-    $('#detail-app-container').attr('data-state', app.state)
-    $('#detail-app-container').data('id', app.id)
-    $('#name-app').data('id', app.id)
-    $('#folder').html('~Hoodie/' + app.name)
-    $body.attr('data-state', 'app-detail')
-  })
+    .then(function (app) {
+      $('#name-app').html(app.name)
+      $('#detail-app-container').attr('data-state', app.state)
+      $('#detail-app-container').data('id', app.id)
+      $('#name-app').data('id', app.id)
+      $('#folder').html('~Hoodie/' + app.name)
+      $body.attr('data-state', 'app-detail')
+    })
 }
 function renderAppList () {
   $body.attr('data-state', 'dashboard')
   $appList.empty()
   applist.findAll()
 
-  .then(function (apps) {
-    apps.forEach(function (app) {
-      var html = `
+    .then(function (apps) {
+      apps.forEach(function (app) {
+        var html = `
       <li data-id="${app.id}" class="list-group-item"
       <button type="button" class="btn btn-lg btn-block">
       ${app.name || '-'}
@@ -175,17 +175,17 @@ function renderAppList () {
       </button>
       </li>
       `
-      $appList.append(html)
+        $appList.append(html)
+      })
     })
-  })
 }
-function renderEditAppForm(id){
+function renderEditAppForm (id) {
   applist.find(id)
 
-  .then(function (app) {
-    $body.attr('data-state', 'edit-app')
-    $('#rename-app').val(app.name)
-    $('#edit-app-container').data('id', app.id)
-  })
+    .then(function (app) {
+      $body.attr('data-state', 'edit-app')
+      $('#rename-app').val(app.name)
+      $('#edit-app-container').data('id', app.id)
+    })
   $('#rename-app').val('')
 }

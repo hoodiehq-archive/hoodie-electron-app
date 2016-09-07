@@ -1,24 +1,25 @@
 /* global localStorage */
-var applist = {}
+var Apps = {}
 
-applist.findAll = function () {
+Apps.findAll = function () {
   var appsData = localStorage.getItem('apps')
   var apps = appsData ? JSON.parse(appsData) : []
   return Promise.resolve(apps)
 }
 
-applist.add = function (app) {
+Apps.add = function (app) {
   app.id = Math.random().toString(36).substr(2, 7)
   app.state = 'stopped'
-  return applist.findAll()
+  return Apps.findAll()
     .then(function (apps) {
       apps.push(app)
       localStorage.setItem('apps', JSON.stringify(apps))
       return app
     })
 }
-applist.find = function (id) {
-  return applist.findAll()
+
+Apps.find = function (id) {
+  return Apps.findAll()
     .then(function (apps) {
       var findApp = function (app) {
         return app.id === id
@@ -27,8 +28,8 @@ applist.find = function (id) {
     })
 }
 
-applist.update = function (app) {
-  return applist.findAll()
+Apps.update = function (app) {
+  return Apps.findAll()
     .then(function (apps) {
       var newApps = apps.map(function (currentApp) {
         if (currentApp.id === app.id) {
@@ -42,23 +43,22 @@ applist.update = function (app) {
         return currentApp
       })
       localStorage.setItem('apps', JSON.stringify(newApps))
-      // console.log(app.state)
       return app
     })
 }
 
-applist.start = function (app) {
+Apps.start = function (app) {
   app.state = 'started'
-  return applist.update(app)
+  return Apps.update(app)
 }
 
-applist.stop = function (app) {
+Apps.stop = function (app) {
   app.state = 'stopped'
-  return applist.update(app)
+  return Apps.update(app)
 }
 
-applist.remove = function (id) {
-  return applist.findAll()
+Apps.remove = function (id) {
+  return Apps.findAll()
     .then(function (apps) {
       var removedApp
       apps = apps.filter(function (app) {

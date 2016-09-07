@@ -1,4 +1,4 @@
-/* global $, applist, location */
+/* global $, Apps, location */
 
 // STORE REFERENCES TO HTML ELEMENTS
 var $body = $(document.body)
@@ -31,7 +31,7 @@ $newAppForm.on('submit', function (event) {
     name: $('#empty-text').val()
   }
   if (app.name) {
-    applist.add(app)
+    Apps.add(app)
 
       .then(function (app) {
         setRoute(app.id)
@@ -67,7 +67,7 @@ $updateAppForm.on('submit', function (event) {
     name: newName
   }
   if (newName) {
-    applist.update(app)
+    Apps.update(app)
 
       .then(function (app) {
         setRoute(id)
@@ -83,7 +83,7 @@ $cancelButton.on('click', function (event) {
 $deleteButton.on('click', function (event) {
   event.preventDefault()
   var id = $('#detail-app-container').data('id')
-  applist.remove(id)
+  Apps.remove(id)
     .then(function (app) {
       setRoute('')
     })
@@ -94,7 +94,7 @@ $startAppButton.on('click', function () {
   var app = {
     id: $('#detail-app-container').data('id')
   }
-  applist.start(app)
+  Apps.start(app)
 
     .then(function (app) {
       $('#detail-app-container').attr('data-state', 'started')
@@ -106,7 +106,7 @@ $stopAppButton.on('click', function () {
   var app = {
     id: $('#detail-app-container').data('id')
   }
-  applist.stop(app)
+  Apps.stop(app)
 
     .then(function (app) {
       $('#detail-app-container').attr('data-state', 'stopped')
@@ -149,7 +149,7 @@ function renderNewAppForm () {
 }
 
 function renderAppDetail (id) {
-  applist.find(id)
+  Apps.find(id)
 
     .then(function (app) {
       $('#name-app').html(app.name)
@@ -163,7 +163,7 @@ function renderAppDetail (id) {
 function renderAppList () {
   $body.attr('data-state', 'dashboard')
   $appList.empty()
-  applist.findAll()
+  Apps.findAll()
 
     .then(function (apps) {
       apps.forEach(function (app) {
@@ -180,7 +180,7 @@ function renderAppList () {
     })
 }
 function renderEditAppForm (id) {
-  applist.find(id)
+  Apps.find(id)
 
     .then(function (app) {
       $body.attr('data-state', 'edit-app')

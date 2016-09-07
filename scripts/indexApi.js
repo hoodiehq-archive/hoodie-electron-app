@@ -60,10 +60,15 @@ applist.stop = function (app) {
 applist.remove = function (id) {
   return applist.findAll()
     .then(function (apps) {
+      var removedApp
       apps = apps.filter(function (app) {
-        return app.id !== id
+        if (app.id === id) {
+          removedApp = app
+          return false
+        }
+        return true
       })
       localStorage.setItem('apps', JSON.stringify(apps))
+      return removedApp
     })
-  return app
 }

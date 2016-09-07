@@ -16,6 +16,7 @@ var $deleteButton = $('#delete-button')
 var $editButton = $('#edit-button')
 var $cancelButton = $('#cancelButton')
 var $detailAppContainer = $('#detail-app-container')
+var $editAppContainer = $('#edit-app-container')
 var $renameApp = $('#rename-app')
 
 // INIT APP
@@ -64,7 +65,7 @@ $editButton.on('click', function (event) {
 $updateAppForm.on('submit', function (event) {
   event.preventDefault()
 
-  var id = $('#edit-app-container').data('id')
+  var id = $editAppContainer.data('id')
   var newName = $renameApp.val()
   var app = {
     id: id,
@@ -189,7 +190,7 @@ function renderEditAppForm (id) {
     .then(function (app) {
       $body.attr('data-state', 'edit-app')
       $renameApp.val(app.name)
-      $('#edit-app-container').data('id', app.id)
+      $editAppContainer.data('id', app.id)
     })
   $renameApp.val('')
 }

@@ -34,4 +34,22 @@
   <button type="button" id="delete-button" data-id="" class="btn btn-sm center-block">
     <i class="glyphicon glyphicon-trash" aria-hidden="true"></i> <span>Delete</span>
   </button>
+
+  <script>
+
+      var self = this
+      newAppForm(){
+        window.location.href='#/new'
+      }
+      // routing
+      var localRoute = riot.route.create()
+      localRoute(function () {
+        self.show = false
+        self.update()
+      })
+    localRoute('/', function () {
+        self.show = true
+        self.update()
+      })
+      </script>
 </detail-app-container>

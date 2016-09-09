@@ -8,15 +8,15 @@ body {
 section {
   display: none;
 }
-[data-state="dashboard"] #apps-container,
+/*[data-state="dashboard"] #apps-container,
 [data-state="new-app"] #create-app-container,
 [data-state="edit-app"] #edit-app-container,
 [data-state="app-detail"] #detail-app-container {
   display: block;
-}
+}*/
 
 /* show / hide main-button */
-#start-button, #stop-button {
+/*#start-button, #stop-button {
   display: none;
 }
 [data-state="started"] #stop-button,
@@ -29,7 +29,7 @@ section {
 }
 [data-state="started"] #link-details{
   display: block;
-}
+}*/
 
 #stop-button{
  margin-bottom: 10px;

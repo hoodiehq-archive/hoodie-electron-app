@@ -11,23 +11,15 @@
   <script src="vendor/modernizr.js"></script>
 </head>
 
-<body data-state="dashboard">
+<body >
   <div class="container">
     <div class="row main-nav">
       <div class="col-sm-4">
-      </div>
-      <div class="col-sm-4">
         <p class="text-center welcome">Welcome to Hoodie</p>
       </div>
-      <div class="col-sm-4">
-      </div>
-    </div><!-- ./main-nav -->
+    </div>
 
-    <apps-container if={state ='dashboard'}></apps-container>
-    <create-app-container if={state ='new-app'}></create-app-container>
-    <detail-app-container if={state ='app-detail'}></detail-app-container>
-    <edit-app-container if={state ='edit-app'}></edit-app-container>
-
+   <app></app>
 
     <div class="container-fluid">
       <div class="footer">
@@ -39,17 +31,16 @@
   <script src="vendor/jquery-2.2.4.min.js"></script>
   <script src="vendor/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
   <script src="scripts/indexApi.js"></script>
-  <script src="riot.min.js"></script>
   <script src="riot.compiler.min.js"></script>
   <script src ="apps-container.tag" type ="riot/tag"></script>
   <script src ="create-app-container.tag" type ="riot/tag"></script>
   <script src ="detail-app-container.tag" type ="riot/tag"></script>
   <script src ="edit-app-container.tag" type ="riot/tag"></script>
+  <script>
+  riot.mount('app')
+  </script>
 
-  <!-- <script>
-      riot.mount('hello',{greeting:'selam',punc:'!'} )
-  </script> -->
-  <script >
+  <!-- <script >
     var self = this
 
     riot.route('/', function(){
@@ -65,7 +56,7 @@
     riot.route('/apps/edit', function(){
       self.state ='edit-app'
     })
-  </script>
+  </script> -->
 
 </body>
 

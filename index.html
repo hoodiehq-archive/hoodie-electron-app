@@ -23,95 +23,7 @@
       </div>
     </div><!-- ./main-nav -->
 
-    <section id="apps-container">
-      <div class="well">
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <button id="new-app-btn" type="button" class="btn btn-lg btn-block btn-primary">
-              New App
-              <i class="glyphicon glyphicon-plus-sign pull-right"></i>
-            </button>
-
-            <ul class="list-group" id="app-list">
-              <!-- New App menu-->
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section><!-- /apps-container -->
-
-    <section id="create-app-container">
-      <div class="well">
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <!-- create app-->
-            <form class="form-group" id="form-new-app">
-              <h3 class="text-center">Let's create Hoodie App :D</h3>
-              <div class="control-group">
-                <label class="control-label" for="new-app-name">App Name</label>
-                <input id="new-app-name" type="text" class="form-control from-size" placeholder="Type your app name">
-              </div>
-              <div class="form-actions">
-                <button id="cancel-create" type="button" class="btn btn_cancel pull-right btn-size-move">Cancel</button>
-                <button id="choose-create" type="submit" class="btn btn-primary pull-right btn-size-move">create</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section><!-- /create-app-container -->
-
-    <section id="detail-app-container">
-      <div class="row main-nav">
-        <div class="col-sm-4">
-          <button type="button" id="go-back-btn" class="btn btn-default pull-left">
-            <span class="glyphicon glyphicon-arrow-left"></span>
-          </button>
-        </div>
-        <div class="col-sm-4">
-          <h3 id="app-name" data-id="" class="text-center"></h3>
-        </div>
-        <div class="col-sm-4">
-          <button id="edit-button" type="button" class="btn btn-default pull-right" >
-            <span class="glyphicon glyphicon-pencil"></span>
-          </button>
-        </div>
-      </div><!-- /.main-nav -->
-
-      <div class="well">
-        <!-- start button -->
-        <button type="button" class="btn btn-default center-block main-button" id='start-button' data-state="">
-          <i class="glyphicon glyphicon-play" aria-hidden="true"></i> <span id="button-label">Start</span>
-        </button>
-        <!-- stop button -->
-        <button type="button" class="btn btn-default center-block main-button" id='stop-button' data-state="">
-          <i class="glyphicon glyphicon-stop" aria-hidden="true"></i> <span id="button-label">Stop</span>
-        </button>
-        <!-- main links -->
-        <ul class="list-group main-links" id="link-details">
-          <li class="list-group-item"><span class="glyphicon glyphicon-folder-open"></span> <a href="#"><span id="folder"></span></a></li>
-          <li class="list-group-item"><span class="glyphicon glyphicon-globe"></span><a href="#">http://localhost:6001</a></li>
-          <li class="list-group-item"><span class="glyphicon glyphicon-user"></span><a href="#">http://localhost:6001/hoodie/admin</a></li>
-        </ul>
-      </div>
-      <button type="button" id="delete-button" data-id="" class="btn btn-sm center-block">
-        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i> <span>Delete</span>
-      </button>
-    </section>
-
-    <section id="edit-app-container">
-      <form id="form-update-app">
-        <p class="control-group">
-          <label class="control-label" for="rename-app">New App Name:</label>
-          <input class="form-control" id="rename-app" type="text" placeholder="Rename App here...">
-        </p>
-
-        <p>
-          <button type="button" class="btn btn-default" id="cancelButton" >Cancel</button>
-          <button type="submit" class="btn btn-primary" id="js-change-appname">Apply</button>
-        </p>
-      </form>
-    </section><!-- /detail-app-container -->
+    <app></app>
 
     <div class="container-fluid">
       <div class="footer">
@@ -120,11 +32,20 @@
     </div>
   </div>
 
+  <script type="riot/tag" src="tags/app.tag"></script>
+  <script type="riot/tag" src="tags/apps-container.tag"></script>
+  <script type="riot/tag" src="tags/create-app-container.tag"></script>
+  <script type="riot/tag" src="tags/detail-app-container.tag"></script>
+  <script type="riot/tag" src="tags/edit-app-container.tag"></script>
+
   <script src="vendor/jquery-2.2.4.min.js"></script>
   <script src="vendor/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
   <script src="vendor/riot/riot+compiler.min.js"></script>
   <script src="scripts/indexApi.js"></script>
-  <script src="scripts/main.js"></script>
+
+  <script>
+  riot.mount('app')
+  </script>
 </body>
 
 </html>

@@ -6,17 +6,19 @@
   We would really appreciate any advice, comments or guidance that can help us learn.
   Thank you :D
 
-## How to install electron-quick-start to get Electron started
+## How to install hoodie-electron-app to get Electron started
 
 After installing Node.js, we clone and install the electron-quick-start in our repo.
 
 ```bash
 # Clone this repository
-git clone https://github.com/Rookies-RGSOC2016/hoodie-electron-demo
+git clone https://github.com/Rookies-RGSOC2016/hoodie-electron-app
 # Go into the repository
-cd hoodie-electron-demo
+cd hoodie-electron-app
 # Install dependencies and run the app
 npm install && npm start
+# Create an executable & installable the Hoodie desktop application
+npm run build
 ```
 [Reference link] Electron and its API in the [documentation](http://electron.atom.io/docs/latest).
 

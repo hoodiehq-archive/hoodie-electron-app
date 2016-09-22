@@ -4,25 +4,59 @@
   "description": "A hoodie dekstop application based on GUI",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "postinstall": "install-app-deps",
+    "start": "electron .",
+    "pack": "build --dir && cp hoodie.png linux-unpacked/resources/app/images/logo.png",
+    "dist": "build"
+  },
+  "build": {
+    "asar": false,
+    "appId": "ie.hoodie.desktopApp",
+    "category": "public.app-category.hoodie-desktop-app",
+    "dmg": {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    },
+    "win": {
+      "remoteReleases": "https://github.com/Rookies-RGSOC2016/hoodie-electron-app.git",
+      "publish": ["github", "bintray"]
+    },
+    "linux": {
+      "publish": null,
+      "target": ["deb", "AppImage"]
+    }
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Rookies-RGSOC2016/hoodie-electron-app.git"
   },
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial"
+    "Hoodie",
+    "desktop-App",
+    "GUI"
   ],
-  "author": "GitHub",
+  "author": {
+    "name" : "Hoodie-RGSoC team Rookies",
+    "email" : "hoodieRookies@gmail.com"
+  },
   "license": "CC0-1.0",
   "bugs": {
     "url": "https://github.com/Rookies-RGSOC2016/hoodie-electron-app/issues"
   },
   "homepage": "https://github.com/Rookies-RGSOC2016/hoodie-electron-app/blob/master/README.md",
   "devDependencies": {
-    "electron": "^1.4.0"
+    "electron": "^1.4.0",
+    "electron-builder": "next"
   }
 }

@@ -4,17 +4,17 @@
   "description": "A hoodie dekstop application based on GUI",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package": "asar pack Hoodie-linux-x64/resources/app Hoodie-linux-x64/resources/app.asar",
+    "build": "electron-packager . Hoodie --ignore=node_module/electron_"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Rookies-RGSOC2016/hoodie-electron-app.git"
   },
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial"
+    "Hoodie",
+    "dekstop-app"
   ],
   "author": "GitHub",
   "license": "CC0-1.0",
@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/Rookies-RGSOC2016/hoodie-electron-app/blob/master/README.md",
   "devDependencies": {
-    "electron": "^1.4.0"
+    "asar": "^0.12.3",
+    "electron": "^1.4.0",
+    "electron-packager": "^8.0.0"
   }
 }

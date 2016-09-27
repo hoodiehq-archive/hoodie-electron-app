@@ -26,9 +26,9 @@
     </button>
     <!-- main links -->
     <ul class="list-group main-links" if={app.state==='started'}>
-      <li class="list-group-item"><span class="glyphicon glyphicon-folder-open"></span> <a href="#">/path/to/{app.name}</a></li>
-      <li class="list-group-item"><span class="glyphicon glyphicon-globe"></span><a href="#">http://localhost:6001</a></li>
-      <li class="list-group-item"><span class="glyphicon glyphicon-user"></span><a href="#">http://localhost:6001/hoodie/admin</a></li>
+      <li class="list-group-item"><span class="glyphicon glyphicon-folder-open"></span> <a href="#">{app.folder}</a></li>
+      <li class="list-group-item"><span class="glyphicon glyphicon-globe"></span><a href="#">http://localhost:{app.port}</a></li>
+      <li class="list-group-item"><span class="glyphicon glyphicon-user"></span><a href="#">http://localhost:{app.port}/hoodie/admin</a></li>
     </ul>
   </div>
   <button type="button" onclick={handleDeleteClick} class="btn btn-sm center-block">
@@ -63,6 +63,7 @@
     })
     route('/apps/*', function (id) {
       self.show = true
+
       Apps.find(id).then(function (app) {
         self.app = app
         self.update()

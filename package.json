@@ -23,12 +23,6 @@
   },
   "homepage": "https://github.com/Rookies-RGSOC2016/hoodie-electron-app/blob/master/README.md",
   "devDependencies": {
-    "electron": "^1.4.0",
-    "glob": "^7.1.0",
-    "rimraf": "^2.5.4"
-  },
-  "dependencies": {
-    "mkdirp": "^0.5.1",
-    "to-id": "^1.0.5"
+    "electron": "^1.4.0"
   }
 }

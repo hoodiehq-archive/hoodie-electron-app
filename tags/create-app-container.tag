@@ -10,7 +10,7 @@
             <input name="new-app-name" oninput={handleInput} class="form-control from-size" placeholder="Type your app name">
           </div>
           <div if={!validName} class="alert alert-warning" role="alert">
-            Name must contain only letters, numbers and underscores!.
+            Name must contain only letters, numbers and dashes.
           </div>
           <div class="form-actions">
             <a href="#/" class="btn btn_cancel pull-right btn-size-move">Cancel</a>

@@ -1,4 +1,5 @@
 /* global localStorage */
+
 var Apps = (function () {
   // PRIVATE STATE & HELPER FUNCTIONS
   var appsData = localStorage.getItem('apps')

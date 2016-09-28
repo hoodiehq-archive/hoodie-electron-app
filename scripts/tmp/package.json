@@ -1,0 +1,17 @@
+{
+  "name": "tmp",
+  "script": "tmp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "start": "hoodie",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "hoodie": "^24.0.0"
+  }
+}

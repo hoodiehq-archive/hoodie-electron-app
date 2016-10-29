@@ -1,8 +1,8 @@
 # hoodie-electron-app
 
-> A native applications to manage Hoodie apps on your Desktop
+> A native application to manage Hoodie apps on your Desktop
 
-**Note:** This project is still work in progress and not yet ready to be used.
+**Note:** This project is still a work in progress and not yet ready to be used.
 But if you are interested in Electron and Hoodie, help us make it happen :)
 
 
